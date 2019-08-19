@@ -1,0 +1,9 @@
+[package]
+name = "sobel"
+version = "0.1.0"
+authors = ["Craig Bishop <craig@craigjb.com>"]
+edition = "2018"
+
+[dependencies]
+clap = "2.33.0"
+image = "0.22.1"
