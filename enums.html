@@ -1,0 +1,330 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Enum - rust-training-aug19</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="installation_win.html"><strong aria-hidden="true">1.</strong> Installation (Windows)</a></li><li><a href="anatomy.html"><strong aria-hidden="true">2.</strong> Anatomy</a></li><li><a href="data_types.html"><strong aria-hidden="true">3.</strong> Data types</a></li><li><a href="control.html"><strong aria-hidden="true">4.</strong> Control Structures</a></li><li><a href="error_handling.html"><strong aria-hidden="true">5.</strong> Option and Result</a></li><li><a href="traits.html"><strong aria-hidden="true">6.</strong> Traits</a></li><li><a href="external_dependencies.html"><strong aria-hidden="true">7.</strong> External dependencies</a></li><li><a href="enums.html" class="active"><strong aria-hidden="true">8.</strong> Enum</a></li><li><a href="borrowing.html"><strong aria-hidden="true">9.</strong> Borrowing, cloning, and scopes</a></li><li><a href="vec_generics.html"><strong aria-hidden="true">10.</strong> Vec, an intro to generics</a></li><li><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li><a href="sobel.html"><strong aria-hidden="true">12.</strong> Example: Image Processing</a></li><li><a href="rayon.html"><strong aria-hidden="true">13.</strong> Rayon</a></li><li><a href="org.html"><strong aria-hidden="true">14.</strong> Code Organization &amp; Modules</a></li><li><a href="extra.html"><strong aria-hidden="true">15.</strong> Extra Credit</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">rust-training-aug19</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#enum" id="enum">Enum</a></h1>
+<p>So we’ve seen enums are good at constraining a type between a limited set of values and they can also hold values, like an error or a type, which makes them algebraic datatypes. Rust Enums are liked <a href="http://patshaughnessy.net/2018/3/15/how-rust-implements-tagged-unions">tagged unions for the C</a> folks but implemented in such a way that you cant hurt yourself.</p>
+<p>TODO have craig go on and on about enums</p>
+<p>Looking through the image documentation, we can <a href="https://docs.rs/image/0.22.1/image/fn.open.html">open an image</a>, get back a ImageResult containing a <a href="https://docs.rs/image/0.22.1/image/enum.DynamicImage.html">DynamicImage type</a>.</p>
+<pre><code class="language-rust ignore no_run">//just unwrap our Result as written we have to have a value or we would have already blown up
+let img = image::open(options.input_path).unwrap();
+</code></pre>
+<p>Then we can use any of the many handy methods including a <a href="https://docs.rs/image/0.22.1/image/enum.DynamicImage.html#method.resize">resize method</a> Authors tend to reach for enums often in constraining input to functions. Here FilterType Enum could be one of the following sampling filter:
+<img src="./images/filtertype.png" alt="Filter Type" /></p>
+<p>So something like</p>
+<pre><code class="language-rust ignore no_run">//using the same variable name, called shadowing, is often even encouraged, as it means less messy temporary variables.
+let img = img.resize(32, 32, FilterType::Nearest);
+</code></pre>
+<p>before finally saving out like:</p>
+<pre><code class="language-rust ignore no_run">img.save(options.output_path).unwrap();
+</code></pre>
+<p>EXERCISE: Finding a cat picture and assembling the pieces is left as a exercise for reader.</p>
+<p>So obviously we'd like to take resize from the command line, which means wed like a match statement to go from a command line argument String to a FilterType Enum, and we need to update our Opt struct to hold it. Wed like to resize based on command line input constrained to one of these types.
+Naively we could implement the following:</p>
+<pre><code class="language-rust ignore no_run">use std::env;
+
+struct Opt {
+    input_path: String,
+    output_path: String,
+    scale_filter: FilterType,
+}
+
+fn options() -&gt; Option&lt;Opt&gt; {
+    let filter_string = env::args().nth(3)?;
+
+    //we actually match on a as_ref borrow of the String
+    let filter = match filter_string.as_ref() {
+        &quot;nearest&quot; =&gt; FilterType::Nearest,
+        &quot;triangle&quot; =&gt; FilterType::Triangle,
+        &quot;catmullrom&quot; =&gt; FilterType::CatmullRom,
+        &quot;gaussian&quot; =&gt; FilterType::Gaussian,
+        &quot;lanczos3&quot; =&gt; FilterType::Lanczos3,
+        _ =&gt; panic!(&quot;uhh I don’t know that filter&quot;),
+    };
+
+    Some(Opt {
+        input_path: env::args().nth(1)?,
+        output_path: env::args().nth(2)?,
+        scale_filter: filter,
+    })
+}
+
+fn main() {
+    let options = options().unwrap();
+    println!(&quot;{}&quot;, options);
+}
+</code></pre>
+<p>Which is totally workable but we can do one better, we can even write traits for enums which would be a clever solution to this problem. Lets abstract all that matching code into a trait. </p>
+<p>Heres a trait definition:</p>
+<pre><code class="language-rust ignore no_run">trait FilterString {
+    fn from_str(input: String) -&gt; Option&lt;FilterType&gt;;
+}
+</code></pre>
+<p>and the usage</p>
+<pre><code class="language-rust ignore no_run">fn options() -&gt; Option&lt;Opt&gt; {
+    let filter_string = env::args().nth(3)?;
+
+    Some(Opt {
+        input_path: env::args().nth(1)?,
+        output_path: env::args().nth(2)?,
+        scale_filter: FilterType::from_str(filter_string)?,
+    })
+}
+</code></pre>
+<p>EXERCISE: Now finish out the the FilterString impl to make all this work</p>
+<h1><a class="header" href="#enum-playground" id="enum-playground">enum playground</a></h1>
+<p>You've started to acquaint yourself with matching in the previous sections but enums with <a href="https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html#destructuring-nested-structs-and-enums">destructuring</a> and <a href="https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html#extra-conditionals-with-match-guards">match guards</a> is so powerful it is worth revising in this altered example from the <a href="https://doc.rust-lang.org/book/ch06-02-match.html">Rust book on matching</a></p>
+<pre><pre class="playpen"><code class="language-rust editable">enum UsState {
+    Alabama,
+    Alaska,
+}
+
+//enums can contain any other type
+enum Coin {
+    Penny,
+    Nickel(u32),
+    Dime(String),
+    Quarter(UsState),
+}
+
+fn value_in_cents(coin: Coin) -&gt; u8 {
+    //you can match on any combination of your enum
+    match coin {
+        Coin::Penny =&gt; 1,
+        Coin::Nickel(date) if date &lt; 1930 =&gt; 50,
+        Coin::Nickel(_) =&gt; 5,
+        Coin::Dime(ref text) if text == &quot;scratched&quot; =&gt; 5,
+        Coin::Dime(text) =&gt; {
+            println!(&quot;{}&quot;, text);
+            10
+        }
+        Coin::Quarter(UsState::Alaska) =&gt; {
+            println!(&quot;State quarter from Alaska&quot;);
+            25
+        }
+        Coin::Quarter(_state) =&gt; {
+            println!(&quot;State quarter from elsewhere&quot;);
+            25
+        }
+    }
+}
+
+fn main() {
+    println!(&quot;{}&quot;, value_in_cents(Coin::Quarter(UsState::Alabama)));
+    println!(&quot;{}&quot;, value_in_cents(Coin::Dime(String::from(&quot;scratched&quot;))));
+    println!(&quot;{}&quot;, value_in_cents(Coin::Dime(String::from(&quot;A+&quot;))));
+    println!(&quot;{}&quot;, value_in_cents(Coin::Nickel(1921)));
+    println!(&quot;{}&quot;, value_in_cents(Coin::Nickel(2000)));
+}
+</code></pre></pre>
+<p>You may ask is this just a toy example? But think back to our filter example. Lets say FilterType also took a f32 as some kind of compression ratio and a few more arguments. Now you've got 2 or 3 arguments to a function and or now you're creating a filter config struct and a validate function with a bunch of if statements to try to catch all the possible improper configurations, and probably a bunch of tests to make sure it can't be used incorrectly. Algebraic Enums wrapping all the necessary data to make that constrained selection work and match statements does almost all of that for us. Reach for Algebraic enums and match statements like this whenever you would reach for a configuration struct and some kind of validate function.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="external_dependencies.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="borrowing.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="external_dependencies.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="borrowing.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

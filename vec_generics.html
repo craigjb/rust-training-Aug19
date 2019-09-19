@@ -1,0 +1,291 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Vec, an intro to generics - rust-training-aug19</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="installation_win.html"><strong aria-hidden="true">1.</strong> Installation (Windows)</a></li><li><a href="anatomy.html"><strong aria-hidden="true">2.</strong> Anatomy</a></li><li><a href="data_types.html"><strong aria-hidden="true">3.</strong> Data types</a></li><li><a href="control.html"><strong aria-hidden="true">4.</strong> Control Structures</a></li><li><a href="error_handling.html"><strong aria-hidden="true">5.</strong> Option and Result</a></li><li><a href="traits.html"><strong aria-hidden="true">6.</strong> Traits</a></li><li><a href="external_dependencies.html"><strong aria-hidden="true">7.</strong> External dependencies</a></li><li><a href="enums.html"><strong aria-hidden="true">8.</strong> Enum</a></li><li><a href="borrowing.html"><strong aria-hidden="true">9.</strong> Borrowing, cloning, and scopes</a></li><li><a href="vec_generics.html" class="active"><strong aria-hidden="true">10.</strong> Vec, an intro to generics</a></li><li><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li><a href="sobel.html"><strong aria-hidden="true">12.</strong> Example: Image Processing</a></li><li><a href="rayon.html"><strong aria-hidden="true">13.</strong> Rayon</a></li><li><a href="org.html"><strong aria-hidden="true">14.</strong> Code Organization &amp; Modules</a></li><li><a href="extra.html"><strong aria-hidden="true">15.</strong> Extra Credit</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">rust-training-aug19</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#vec" id="vec">Vec</a></h1>
+<p><code>std::vec::Vec</code> is one of the most widely used data structures in Rust programs. It's even included in the prelude (no need to <code>use std::vec::Vec</code>). Vec is a contiguous growable array container, roughly equivalent to C++'s <code>std::vector</code>.</p>
+<p>Just like C++'s <code>std::vector</code>, <code>Vec</code> in Rust is generic over its contained type.</p>
+<pre><code class="language-rust ignore">pub struct Vec&lt;T&gt; {
+    ...
+}
+</code></pre>
+<p>At the surface level, Rust generics have a similar syntax to C++ generics. However, we'll soon see that the Rust type system makes using generics much different.</p>
+<p>For now, let's explore <code>Vec</code> a bit.</p>
+<h2><a class="header" href="#creating-vecs" id="creating-vecs">Creating Vecs</a></h2>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let v1 = Vec::&lt;i32&gt;::new();
+    let v2: Vec&lt;i32&gt; = Vec::new();
+    let v3: Vec&lt;i32&gt; = vec![];
+    let v4: Vec&lt;i32&gt; = vec![1, 2, 3, 4];
+}
+</code></pre></pre>
+<p>If the compiler can't infer the type parameter for a Vec, it will show you can error message:</p>
+<pre><code class="language-rust editable ignore">fn main() {
+    let v = vec![1, 2, 3, 4];
+}
+</code></pre>
+<p><code>1, 2, 3, 4</code> are valid literals for multiple integer types. We need to annotate the type parameter somewhere.</p>
+<h2><a class="header" href="#vec-operations" id="vec-operations">Vec operations</a></h2>
+<p><code>Vec</code> provides familiar methods for mutation:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut v: Vec&lt;i32&gt; = Vec::new();
+
+    v.push(5);
+    v.push(6);
+    println!(&quot;v: {:?}&quot;, v);
+
+    let popped = v.pop();
+    println!(&quot;popped: {:?}&quot;, popped);
+    println!(&quot;v: {:?}&quot;, v);
+
+    v.insert(0, 7);
+    println!(&quot;v: {:?}&quot;, v);
+
+    v.clear();
+    println!(&quot;v: {:?}&quot;, v);
+}
+</code></pre></pre>
+<p>As we'll see in the next section on iterators, mutating a <code>Vec</code> in-place is not always the best option in Rust.</p>
+<p>We can also grab a few properties of a Vec:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let v: Vec&lt;i32&gt; = vec![1, 2, 3, 4];
+    println!(&quot;{:?}&quot;, v.len());
+    println!(&quot;{:?}&quot;, v.is_empty());
+}
+</code></pre></pre>
+<h1><a class="header" href="#generics" id="generics">Generics</a></h1>
+<p>Rust generics aren't just for structs; they can be used for structs, functions, traits, and more. Let's look at a simple generic function:</p>
+<p>TODO: Simpler generics example without the type parameter.</p>
+<pre><code class="language-rust editable ignore">fn generic_add&lt;T&gt;(a: T, b: T) -&gt; T {
+    a + b
+}
+
+fn main() {
+    println!(&quot;{:?}&quot;, generic_add(1, 2))
+    println!(&quot;{:?}&quot;, generic_add(1.0, 2.0))
+}
+</code></pre>
+<p>Yup, this causes a compiler error. Unlike C++ templating, Rust generics are fully type-aware. In this case, since the type paramter <code>T</code> can be any type, how does the compiler know that the type implements the <code>+</code> operator?</p>
+<p>In fact, there is a way we can tell the compiler we only want to allow types with the <code>+</code> operator. In Rust, the <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> and other operators are traits implemented by data types. So, if we tell the compiler that we want to only allow types that implement the <code>+</code> trait, called <code>Add</code>, it should work. So, we are constraining the type parameter to types that implement a trait.</p>
+<pre><pre class="playpen"><code class="language-rust editable">use std::ops::Add;
+
+fn generic_add&lt;T: Add&lt;Output=T&gt;&gt;(a: T, b: T) -&gt; T {
+    a + b
+}
+
+fn main() {
+    println!(&quot;{:?}&quot;, generic_add(1, 2));
+    println!(&quot;{:?}&quot;, generic_add(1.0, 2.0));
+}
+</code></pre></pre>
+<p>You may have also noticed <code>Output=T</code>, which is what's called a type parameter on a trait. Rust doesn't assume that addition results in the same type as the operands. In this case, we constrained our function to only types that implement <code>Add</code> that results in the same type.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="borrowing.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="iterators.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="borrowing.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="iterators.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

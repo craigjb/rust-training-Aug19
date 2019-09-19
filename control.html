@@ -1,0 +1,317 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Control Structures - rust-training-aug19</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="installation_win.html"><strong aria-hidden="true">1.</strong> Installation (Windows)</a></li><li><a href="anatomy.html"><strong aria-hidden="true">2.</strong> Anatomy</a></li><li><a href="data_types.html"><strong aria-hidden="true">3.</strong> Data types</a></li><li><a href="control.html" class="active"><strong aria-hidden="true">4.</strong> Control Structures</a></li><li><a href="error_handling.html"><strong aria-hidden="true">5.</strong> Option and Result</a></li><li><a href="traits.html"><strong aria-hidden="true">6.</strong> Traits</a></li><li><a href="external_dependencies.html"><strong aria-hidden="true">7.</strong> External dependencies</a></li><li><a href="enums.html"><strong aria-hidden="true">8.</strong> Enum</a></li><li><a href="borrowing.html"><strong aria-hidden="true">9.</strong> Borrowing, cloning, and scopes</a></li><li><a href="vec_generics.html"><strong aria-hidden="true">10.</strong> Vec, an intro to generics</a></li><li><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li><a href="sobel.html"><strong aria-hidden="true">12.</strong> Example: Image Processing</a></li><li><a href="rayon.html"><strong aria-hidden="true">13.</strong> Rayon</a></li><li><a href="org.html"><strong aria-hidden="true">14.</strong> Code Organization &amp; Modules</a></li><li><a href="extra.html"><strong aria-hidden="true">15.</strong> Extra Credit</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">rust-training-aug19</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#control-structures" id="control-structures">Control Structures</a></h1>
+<p>So you want a branch, eh? Rust will give you most of the familiar tools, and a few improved tools.</p>
+<h2><a class="header" href="#if" id="if">If</a></h2>
+<p>Notice, there are no required parentheses around the predicate (the compiler will gently warn you if you unnecessarily put them there). Comparison operators are nearly identical with C/C++.</p>
+<p><a href="https://doc.rust-lang.org/book/appendix-02-operators.html">Rust operator reference</a></p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    if 1 + 1 == 2 {
+        println!(&quot;It's true!&quot;);
+    } else if 1 + 1 == 3 {
+        println!(&quot;This world is quite odd...&quot;);
+    } else {
+        println!(&quot;What has the world come to?&quot;);
+    }
+}
+</code></pre></pre>
+<h3><a class="header" href="#if-is-an-expression" id="if-is-an-expression">If is an expression!</a></h3>
+<p>Rust differs from C/C++ in that <code>if</code>, and other control flow structures, are also expressions that evaluate to a value. For example, the below <code>if</code> statement conditionally returns one of two strings. Notice that there are no semicolons after the return values, just like function return values.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    println!(&quot;The world is {}&quot;,
+        if 1 + 1 == 2 {
+            &quot;sane&quot;
+        } else {
+            &quot;insane&quot;
+        });
+}
+</code></pre></pre>
+<p>This <code>if</code> expression behaves much like the ternary operator in C/C++, but also allows you to have multiple <code>else if</code> predicates without nesting.</p>
+<p>Control flow statements in Rust evaluate to a value, even if you are not using that value. If you end a branch with <code>;</code>, the return value will be <code>()</code>, the same as a function without a specified return value. Therefore, all the possible evaluations of the control structure need to return the same type. For example, the below code will not compile.</p>
+<pre><code class="language-rust editable ignore">fn main() {
+    if 1 + 1 == 2 {
+        println!(&quot;The world is sane.&quot;);
+    } else {
+        5
+    }
+}
+</code></pre>
+<p>It's quite common in Rust to see functions that look like below. The return value of the function is the evaluated value of the if expression.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn square_if_over_10(i: i32) -&gt; i32 {
+    if i &gt; 10 {
+        i * i
+    } else {
+        i
+    }
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#match" id="match">Match</a></h2>
+<p>When you would reach for a switch statement, match is what you want in Rust. Matching is incredibly powerful and combines boolean operators as well as the range syntax from before.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+
+    let number:u32 = 11;
+    // ^ Try some different values for `number`
+
+    match number {
+        1 | 2 =&gt; println!(&quot;one or two&quot;),
+        3...4 =&gt; println!(&quot;three or four&quot;),
+        // you can use block syntax as well
+        11 =&gt; {
+            println!(&quot;11&quot;);
+            println!(&quot;and only 11&quot;)
+        }
+        12..=44 =&gt; println!(&quot;12 to 44 inclusive&quot;),
+        // matching is exhaustive so if you miss a case Rust will complain
+        // or use catch all 'default' case
+        _ =&gt; println!(&quot;The rest&quot;),
+    }
+}
+</code></pre></pre>
+<h2><a class="header" href="#loop" id="loop">Loop</a></h2>
+<p>Rust provides an unconditional loop construct, equivalent to <code>while (true) { }</code> in C/C++. The loop can be broken with <code>break</code> or execution can skip to the next iteration with <code>continue</code>. Unlike C/C++ loops, and just like Rust <code>if</code> statements, loops evaluate to a value as well.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut i = 2;
+    let biggest = loop {
+        if i &gt; 50 {
+            break i / 2;
+        }
+        i *= 2;
+    };
+    println!(&quot;The biggest power of 2 less than 50 is {}&quot;, biggest);
+}
+</code></pre></pre>
+<p>Just like in the <code>if</code> statements above, <code>break;</code> evaluates to the type <code>()</code>, but <code>break 5;</code> evaluates to an integer type.</p>
+<h2><a class="header" href="#while" id="while">While</a></h2>
+<p>Rust's while loop looks familiar, minus the parentheses around the predicate.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut i = 2;
+    while i &lt; 50 {
+        i *= 2;
+    }
+    println!(&quot;The biggest power of 2 less than 50 is {}&quot;, i / 2);
+}
+</code></pre></pre>
+<h2><a class="header" href="#for" id="for">For?</a></h2>
+<p>Those above contrived loop examples seem like perfect cases for a for loop right? Well, <code>for</code> is one of the places that Rust takes a familiar control flow construct and completely rethinks how it should work. The below example might look more similar to Python and uses the <a href="https://doc.rust-lang.org/std/ops/struct.Range.html">range syntax</a></p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for i in 0..10 {
+        println!(&quot;{}&quot;, i);
+    }
+}
+</code></pre></pre>
+<p>There's a good reason they look similar too! Much like Python, iterators are use all over the place. You won't find the familiar <code>for ( ; ; ) {}</code> construct, but don't worry; Rust's iterators are vastly more powerful, and safe. The next section takes us on a deep dive into iterators.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="data_types.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="error_handling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="data_types.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="error_handling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

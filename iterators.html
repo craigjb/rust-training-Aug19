@@ -1,0 +1,360 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Iterators - rust-training-aug19</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="installation_win.html"><strong aria-hidden="true">1.</strong> Installation (Windows)</a></li><li><a href="anatomy.html"><strong aria-hidden="true">2.</strong> Anatomy</a></li><li><a href="data_types.html"><strong aria-hidden="true">3.</strong> Data types</a></li><li><a href="control.html"><strong aria-hidden="true">4.</strong> Control Structures</a></li><li><a href="error_handling.html"><strong aria-hidden="true">5.</strong> Option and Result</a></li><li><a href="traits.html"><strong aria-hidden="true">6.</strong> Traits</a></li><li><a href="external_dependencies.html"><strong aria-hidden="true">7.</strong> External dependencies</a></li><li><a href="enums.html"><strong aria-hidden="true">8.</strong> Enum</a></li><li><a href="borrowing.html"><strong aria-hidden="true">9.</strong> Borrowing, cloning, and scopes</a></li><li><a href="vec_generics.html"><strong aria-hidden="true">10.</strong> Vec, an intro to generics</a></li><li><a href="iterators.html" class="active"><strong aria-hidden="true">11.</strong> Iterators</a></li><li><a href="sobel.html"><strong aria-hidden="true">12.</strong> Example: Image Processing</a></li><li><a href="rayon.html"><strong aria-hidden="true">13.</strong> Rayon</a></li><li><a href="org.html"><strong aria-hidden="true">14.</strong> Code Organization &amp; Modules</a></li><li><a href="extra.html"><strong aria-hidden="true">15.</strong> Extra Credit</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">rust-training-aug19</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#iterators" id="iterators">Iterators</a></h1>
+<p>Iterators are one of the most powerful features in Rust! They are also a gateway drug to functional programming.</p>
+<p>The last example from the control flow section used a simple iterator, called a <code>Range</code> (similar to <code>range()</code> in Python).</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for i in 0..10 {
+        println!(&quot;{}&quot;, i);
+    }
+}
+</code></pre></pre>
+<h2><a class="header" href="#combinators" id="combinators">Combinators</a></h2>
+<p>The Rust standard library provides a large selection of combinators for use with iterators. Here's a whirlwind tour of a few important ones! You can find a full list in the <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">documentation for the Iterator trait</a>.</p>
+<p>The <code>map</code> method takes a closure to apply on each iterated element. It's the equivalent of running a given function on each element in the iterator and generating a new iterator of the return values.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for i in (0..10).map(|i| i * 2) {
+        println!(&quot;{}&quot;, i);
+    }
+}
+</code></pre></pre>
+<p>The <code>filter</code> method skips values that don't pass a predicate.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for (i, j) in (1..10).map(|i| (i, i * 3)).filter(|(i, j)| i % 2 == 0) {
+        println!(&quot;{} tripled is even: {}&quot;, i, j);
+    }
+}
+</code></pre></pre>
+<p><code>flat_map</code> iterates through iterators like n dimensional structures and concatenates them one after the other, or &quot;flattens&quot; them.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+
+    let v = vec![vec![0, 1], vec![14, 15], vec![4, 5]];
+
+    //flat_map gives a closure where we could transform, instead we just return it
+    for i in v.iter().flat_map(|j| j) {
+        println!(&quot;{:?}&quot;, i);
+    }
+}
+</code></pre></pre>
+<p><code>fold</code> combines all the values from an iterator, pairwise, starting with an initial value.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn factorial(n: i32) -&gt; i32 {
+    (1..n).fold(n, |x, y| x * y)
+}
+
+fn main() {
+    println!(&quot;5! = {}&quot;, factorial(5));
+}
+</code></pre></pre>
+<p>Note: Rust actually has a combinator just for multiplicative products <code>product()</code>, and for sums: <code>sum()</code>.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let v: Vec&lt;usize&gt; = (0..5)
+        .map(|i| i * 2)
+        .collect();
+    println!(&quot;{:?}&quot;, v);
+}
+</code></pre></pre>
+<p>If you want even more combinators like these, make sure to check out the <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">docs</a>. And, if you want even more combinators, checkout the <a href="https://docs.rs/itertools/0.8.0/itertools/">itertools</a> crate!</p>
+<h2><a class="header" href="#enumeration-combinator" id="enumeration-combinator">Enumeration combinator</a></h2>
+<p>Sometimes, you miss your familar C-style for loop with its convenient access to the index; but don't run away yet, Rust has the <code>enumerate()</code> combinator for just this problem. The Iterator trait provides a combinator, called <code>enumerate</code> just for this purpose (very similar to Python's <code>enumerate()</code>).</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for (index, value) in (100..110).enumerate() {
+        println!(&quot;{}: {}&quot;, index, value);
+    }
+}
+</code></pre></pre>
+<p>You might have noticed in the above example that <code>enumerate</code> changed the iterator elements from integers to tuples (which is why we use <code>for (index, value) ...</code>). When you chain iterators together, you can modify the type of the iterator element as you go.</p>
+<p>It's common to see code that keeps an index or other book-keeping info along with the value of interest in a tuple:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for (index, value) in (100..110)
+        .enumerate()
+        .map(|(i, v)| (i, v * 10))
+    {
+        println!(&quot;{}: {}&quot;, index, value);
+    }
+}
+</code></pre></pre>
+<h2><a class="header" href="#more-complex-iterators-with-changing-element-type" id="more-complex-iterators-with-changing-element-type">More complex iterators with changing element type</a></h2>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for (i, j, k) in (100..110) // type is usize
+        .enumerate() // type is now (usize, usize)
+        .map(|(i, j)| j * i) // type is now usize
+        .map(|v| (v, v * 10, 0)) // type is now (usize, usize, usize)
+    {
+        println!(&quot;{}, {}, {}&quot;, i, j, k);
+    }
+}
+</code></pre></pre>
+<h2><a class="header" href="#thinking-in-iterators" id="thinking-in-iterators">Thinking in iterators</a></h2>
+<p>You might be very familiar with this kind of nested for loop in C/C++:</p>
+<pre><code class="language-c ignore">for (int i = 0; i &lt; 3; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        compute_something(data[i, j]);
+    }
+}
+</code></pre>
+<p>There are multiple ways to express this loop in Rust using iterators, each with its own advantages. First, we can directly translate incrementing indices into rust <a href="https://doc.rust-lang.org/std/ops/struct.Range.html">Ranges</a>.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for i in 0..3 {
+        for j in 0..3 {
+            println!(&quot;{}, {}&quot;, i, j);
+        }
+    }
+}
+</code></pre></pre>
+<p>Or, we can use iterator combinators to combine multiple ranges into a tuple for each element. This lets the computation code or body of the loop not care about how each element is generated. The elements of the combined iterator can be easily stored in a Vec, or broken up into chunks for parallel operation, or filtered by some predicate.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    (0..3).for_each(|i|
+        (0..3).for_each(|j| println!(&quot;{}, {}&quot;, i, j)));
+}
+</code></pre></pre>
+<p>As a quick preview, this could be done in parallel across CPU cores with a simple change:</p>
+<pre><pre class="playpen"><code class="language-rust ignore mdbook-runnable">#extern crate rayon;
+use rayon::prelude::*;
+
+fn main() {
+    (0..3).into_par_iter()
+        .for_each(|i| (0..3).for_each(|j| println!(&quot;{}, {}&quot;, i, j)));
+}
+</code></pre></pre>
+<p>Notice that the output order changes when we re-run the example, since the computation is distributed across multiple cores. We'll talk more about parallel iterators soon.</p>
+<h2><a class="header" href="#move-closures" id="move-closures">Move closures</a></h2>
+<p>In a lot of Rust code, you never have to worry about move your local variables get captured into a closure (environment capture). However, it does seem to pop-up more often when working on complicated iterator chains. For example:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    (0..3).flat_map(|i|
+        (0..3).map(move |j| (i, j)))
+        .for_each(|idx| println!(&quot;{:?}&quot;, idx));
+}
+</code></pre></pre>
+<p>What's that <code>move</code> keyword doing? Let's check out the compiler output without it.</p>
+<pre><code class="language-ignore">error[E0373]: closure may outlive the current function, but it borrows `i`, which is owned by the current function
+ --&gt; src/main.rs:2:36
+  |
+2 |     (0..3).flat_map(|i| (0..3).map(|j| (i, j)))
+  |                                    ^^^  - `i` is borrowed here
+  |                                    |
+  |                                    may outlive borrowed value `i`
+  |
+note: closure is returned here
+ --&gt; src/main.rs:2:25
+  |
+2 |     (0..3).flat_map(|i| (0..3).map(|j| (i, j)))
+  |                         ^^^^^^^^^^^^^^^^^^^^^^
+help: to force the closure to take ownership of `i` (and any other referenced variables), use the `move` keyword
+  |
+2 |     (0..3).flat_map(|i| (0..3).map(move |j| (i, j)))
+  |                                    ^^^^^^^^
+</code></pre>
+<p>Basically, the compiler needs to know that the when <code>j</code> is moved into the inner closure that single-ownership is not violated. When we write <code>move</code> it indicates that the ownership is now inside the closure, and that the outer code will not use the moved values. This contrasts with the default closure capture where the variables are borrowed. In this case, borrowing doesn't work because <code>i</code> is only temporary.</p>
+<p>For our example with inegers, it makes no difference. But, if we'ire iterating over large data structures with complicated internal state, it makes a huge difference. Lucky for us, the compiler error points out exactly what we need to do. As you write more Rust, you will start to get a feel for the <code>move</code> closure, but in the beginning, the compiler really helps point out what we need to do.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="vec_generics.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="sobel.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="vec_generics.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a href="sobel.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

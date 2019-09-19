@@ -1,0 +1,2035 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>rust-training-aug19</title>
+        
+        <meta name="robots" content="noindex" />
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="installation_win.html"><strong aria-hidden="true">1.</strong> Installation (Windows)</a></li><li><a href="anatomy.html"><strong aria-hidden="true">2.</strong> Anatomy</a></li><li><a href="data_types.html"><strong aria-hidden="true">3.</strong> Data types</a></li><li><a href="control.html"><strong aria-hidden="true">4.</strong> Control Structures</a></li><li><a href="error_handling.html"><strong aria-hidden="true">5.</strong> Option and Result</a></li><li><a href="traits.html"><strong aria-hidden="true">6.</strong> Traits</a></li><li><a href="external_dependencies.html"><strong aria-hidden="true">7.</strong> External dependencies</a></li><li><a href="enums.html"><strong aria-hidden="true">8.</strong> Enum</a></li><li><a href="borrowing.html"><strong aria-hidden="true">9.</strong> Borrowing, cloning, and scopes</a></li><li><a href="vec_generics.html"><strong aria-hidden="true">10.</strong> Vec, an intro to generics</a></li><li><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li><a href="sobel.html"><strong aria-hidden="true">12.</strong> Example: Image Processing</a></li><li><a href="rayon.html"><strong aria-hidden="true">13.</strong> Rayon</a></li><li><a href="org.html"><strong aria-hidden="true">14.</strong> Code Organization &amp; Modules</a></li><li><a href="extra.html"><strong aria-hidden="true">15.</strong> Extra Credit</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">rust-training-aug19</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <p>Rust is a safe, typed, compiled, general programming language.</p>
+<ul>
+<li>Safe is a very overloaded term in Rust, but by default Rust uses static analysis at compile time to enforces rules about memory usage. Traditionally, managing your own memory in languages like C++ and Objective-C has been very tedious and still error prone. Rust's solution to this, The borrow checker, is probably the defining feature of the Rust language. You have to spend a little more time annotating your code to say who owns a variable at any given time with the borrow checker keeping you honest the whole time. It's like pair programming with a friend.</li>
+<li>Typed - As opposed to languages like javascript, Rust forces you to state the types of variables going into and out of functions. This helps you organize your intentions and acts much like a set of tests to make sure your code makes sense.</li>
+<li>Compiled - Rust has to do all its work up front at compile time and turns into a binary immediately. Compiles can be slow sometimes, but our code runs fast, and anywhere, as a result. <a href="https://xkcd.com/303/">obligatory xkcd</a> </li>
+<li>General. Much like most modern languages these days it's not strictly functional or object oriented (OO). Further it can be deployed almost anywhere. We can write backend server code, embedded microcontroller applications, and with WASM, even front end web applications, cloud functions and blockchains.</li>
+</ul>
+<p>Our audience are professional developers cross training from languages such as C, C++, Python and Golang.</p>
+<p>We will build on and link heavily to the <a href="https://doc.rust-lang.org/book/">Rust Book</a> and <a href="https://doc.rust-lang.org/std/">Standard Library documentation</a> but if you ever get lost you should take it upon yourself to head back there to find clarification. A huge part of why Rust is so powerful is its evolving, responsive, tested, up to date and clear documentation. Many thanks to the tireless authors of those resources. </p>
+<h1><a class="header" href="#installing-rust-on-windows" id="installing-rust-on-windows">Installing Rust on Windows</a></h1>
+<p>This guide will cover:</p>
+<ul>
+<li><a href="installation_win.html#installing-rust-with-rustup">Installing Rust with Rustup</a></li>
+<li><a href="installation_win.html#configuring-gvim-8x-for-rust-with-the-rls">Configuring GVim 8.x for Rust</a></li>
+<li><a href="installation_win.html#configuring-vs-code-for-rust-with-the-rls">Configuring VS Code for Rust</a></li>
+</ul>
+<h2><a class="header" href="#installing-rust-with-rustup" id="installing-rust-with-rustup">Installing Rust with Rustup</a></h2>
+<ol>
+<li>
+<p>Visit <a href="https://rustup.rs">rustup.rs</a>, download, and then run rustup-init.exe</p>
+<p><img src="./images/install/rustup.png" alt="Rustup website" /></p>
+</li>
+<li>
+<p>Make sure you have the dependencies met. The Rust installation includes the Rust compiler, but Rust uses the system linker to create the final executables and link to system shared libraries (DLLs). So, we have to make sure a usable linker and system libraries are installed.</p>
+<ol>
+<li>If you already have one of the listed Visual Studio versions installed with C++ build tools, the dependencies should be met already
+<ol>
+<li>If later you get an error about &quot;Link.exe&quot;, follow step 2</li>
+</ol>
+</li>
+<li>Otherwise, install these:
+<ol>
+<li><a href="https://developer.microsoft.com/en-us/windows/downloads/windows-10-sdk">Windows 10 SDK</a></li>
+<li><a href="https://www.google.com/url?sa=t&amp;rct=j&amp;q=&amp;esrc=s&amp;source=web&amp;cd=1&amp;cad=rja&amp;uact=8&amp;ved=2ahUKEwj647KSzY_kAhXCPn0KHV5nC4IQFjAAegQIAhAB&amp;url=https%3A%2F%2Fgo.microsoft.com%2Ffwlink%2F%3FLinkId%3D691126&amp;usg=AOvVaw0geDw_h-TSCfzTMvYE2ZOw">Microsoft Visual C++ build tools</a></li>
+</ol>
+</li>
+</ol>
+<p><img src="./images/install/rustup2.png" alt="Rustup deps" /></p>
+</li>
+<li>
+<p>Press <code>1</code> and then <code>enter</code> to proceed with the installation</p>
+<p><img src="./images/install/rustup3.png" alt="Proceed with install" /></p>
+</li>
+<li>
+<p>Once the installation is complete, the below message should show. Press <code>enter</code> to close the window.</p>
+<p><img src="./images/install/rustup4.png" alt="Installation finished" /></p>
+</li>
+<li>
+<p>Test the rustup installation:</p>
+<ol>
+<li>Open a new command prompt window</li>
+<li>Run the command <code>rustup</code>. The command should show help information.</li>
+</ol>
+<p><img src="./images/install/rustuphelp.png" alt="Rustup help" /></p>
+<ol start="3">
+<li>If the <code>rustup</code> command fails, add <code>%USERPROFILE%\.cargo\bin</code> to your <code>PATH</code> environment variable.</li>
+</ol>
+</li>
+<li>
+<p>Install the Rust Language Server (RLS):</p>
+<ol>
+<li>Open a command prompt window (you can reuse the same window)</li>
+<li>Run the command <code>rustup component add rls</code>. The command should download and install the RLS.</li>
+</ol>
+<p><img src="./images/install/rustup5.png" alt="Installing Rust language server" /></p>
+<ol start="3">
+<li>Install the rustfmt component by running the command <code>rustup component add rustfmt</code></li>
+</ol>
+<p><img src="./images/install/rustupfmt.png" alt="Installing Rust language server" /></p>
+</li>
+</ol>
+<h2><a class="header" href="#test-out-the-rust-installation" id="test-out-the-rust-installation">Test out the Rust installation</a></h2>
+<ol>
+<li>
+<p>Open a command prompt window</p>
+</li>
+<li>
+<p>Navigate to a directory wherein we will create a test project.</p>
+</li>
+<li>
+<p>Run the command <code>cargo new --bin hellorust</code> to create a new project named &quot;hellorust&quot;.</p>
+<ul>
+<li>Cargo is the Rust build system and package manager.</li>
+<li>The <code>--bin</code> argument means we are creating a binary project that builds an executable.</li>
+<li>We can also create a crate (Rust's name for libraries) by passing the <code>--lib</code> argument.</li>
+<li>The <code>cargo new</code> command creates a new directory named &quot;hellorust&quot; and creates the default Rust project directory structure</li>
+</ul>
+<pre><code class="language-text">hellorust
+- src
+  - main.rs
+- Cargo.toml
+- Cargo.lock
+- target
+</code></pre>
+<ul>
+<li>The <code>src</code> directory contains the project's Rust source code files</li>
+<li><code>Cargo.toml</code> contains the project configuration used by Cargo to build the project. This file includes dependencies, build configurations, metadata, and more.</li>
+<li><code>Cargo.lock</code> is generated by Cargo and contains the &quot;locked&quot; or exact versions of the dependencies used to build your project. This file should not be edited.</li>
+<li>The <code>target</code> directory contains the build products generate by Cargo. For a binary project, the exectuable will usually be at <code>target\debug\hellorust</code> (or <code>target\release\hellorust</code>).</li>
+</ul>
+</li>
+<li>
+<p>Navigate into the &quot;hellorust&quot; directory</p>
+</li>
+<li>
+<p>Build the project by running the command <code>cargo build</code></p>
+<ul>
+<li>By default, Cargo will build the project in the debug configuration</li>
+<li>You can build the release configuration with the command: <code>cargo build --release</code></li>
+<li>If you see an error about &quot;Link.exe&quot;, make sure the installation dependencies are met (detailed in the installation section above)</li>
+</ul>
+<p><img src="./images/install/cargobuild.png" alt="Running Cargo build" /></p>
+</li>
+<li>
+<p>Run the project with the command: <code>cargo run</code></p>
+<ul>
+<li>This command will also build the project if your build is out-of-date</li>
+<li>By default, <code>cargo run</code> builds and runs the debug configuration. You can run the release configuration with: <code>cargo run --release</code>.</li>
+<li>Arguments after <code>cargo run</code> are passed to Cargo (for example the <code>--release</code> argument). If you want to pass arguments to your program, put them after a <code>--</code> delimiter. For example: <code>cargo run --release -- my args here</code></li>
+</ul>
+<p><img src="./images/install/cargorun.png" alt="Running Cargo project" /></p>
+</li>
+<li>
+<p>Many Rust projects include automated tests. Cargo can run these tests with the command <code>cargo test</code> (<code>--release</code> works here too). To try out Rust tests, we can modify <code>src/main.rs</code> to contain a simple failing test:</p>
+<ol>
+<li>Modify <code>main.rs</code>:</li>
+</ol>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    println!(&quot;Hello, world!&quot;);
+}
+
+#[test]
+fn failing_test() {
+    assert!(2 + 2 == 5);
+}
+</code></pre></pre>
+<ol>
+<li>Run the tests with <code>cargo test</code></li>
+</ol>
+<p><img src="./images/install/cargotest.png" alt="Using Cargo to run tests" /></p>
+</li>
+</ol>
+<h2><a class="header" href="#configuring-gvim-8x-for-rust-with-the-rls" id="configuring-gvim-8x-for-rust-with-the-rls">Configuring GVim 8.x for Rust with the RLS</a></h2>
+<p>The steps below configure GVim 8.x on Windows to support Rust and use the Rust Language Server (RLS) for autocompletion.</p>
+<ol>
+<li>
+<p>Make sure you have a working Git installation. (<a href="https://git-scm.com/download/win">Download Here for Windows</a>)</p>
+</li>
+<li>
+<p>Visit <a href="https://rls.booyaa.wtf">https://rls.booyaa.wtf</a> and follow the steps for your preferred Vim package management strategy.</p>
+</li>
+<li>
+<p>Modify your vimrc to include the below snippet. The guide linked in the previous step is still configured to use the Rust nightly build, since the RLS used to only be available in the nightly builds. RLS is now available in stable, and we installed stable Rust (the default). The below snippet should replace the one from the linked guide, and changes the 'cmd' to use stable instead of nightly.</p>
+<pre><code class="language-text"> if executable('rls')
+     au User lsp_setup call lsp#register_server({
+         \ 'name': 'rls',
+         \ 'cmd': {server_info-&gt;['rustup', 'run', 'stable', 'rls']},
+         \ 'whitelist': ['rust'],
+         \ })
+ endif
+</code></pre>
+</li>
+<li>
+<p>Make sure <code>filetype plugin indent on</code> and <code>syntax enable</code> and lets add format on save as well like <code>let g:rustfmt_autosave = 1</code></p>
+</li>
+<li>
+<p>Restart GVim or reload your vimrc</p>
+</li>
+<li>
+<p>Open a Rust file and test our autocompletion (for example start typing <code>use std::</code>)</p>
+<p><img src="./images/install/gvimrls.png" alt="GVim Rust autocompletion" /></p>
+</li>
+</ol>
+<h2><a class="header" href="#configuring-vs-code-for-rust-with-the-rls" id="configuring-vs-code-for-rust-with-the-rls">Configuring VS Code for Rust with the RLS</a></h2>
+<p>The steps below configure VS Code on Windows to support Rust and use the Rust Language Server (RLS) for autocompletion and incremental compilation to display warnings and errors.</p>
+<ol>
+<li>
+<p>Install the Rust (rls) extension by user 'rust-lang' in VS Code. There are several other plugins, but this one is the most maintained.</p>
+</li>
+<li>
+<p>Reload the window in VS Code, or restart VS Code</p>
+</li>
+<li>
+<p>If you see an error message that the RLS could not be started or that the extension could not find rustup, then you will have to configure VS Code's path for rustup:</p>
+<ol>
+<li>
+<p>Open VS Code preferences and navigate to the Rust extension preferences</p>
+</li>
+<li>
+<p>Modify the rustup path to use an absolute path to your installation: <code>C:\Users\&lt;username&gt;\.cargo\bin\rustup</code></p>
+<p><img src="./images/install/vscode_rust.png" alt="VS Code rustup path" /></p>
+</li>
+<li>
+<p>Reload the window in VS Code, or restart VS Code</p>
+</li>
+<li>
+<p>You may see a prompt in the lower-right to install the RLS. If so, click yes.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>Open a Rust file and test out the RLS:</p>
+<ol>
+<li>Try autocompletion (for example start typing <code>use std::</code>) at the top of a file</li>
+<li>Try the incremental compilation (for example <code>println!(&quot;Hello, world!&quot;) blah blah 42 42</code> should show an inline error)</li>
+</ol>
+<p><img src="./images/install/vscode_rust2.png" alt="VS Code Rust autocompletion and incremental compilation" /></p>
+</li>
+<li>
+<p>Enable format on save in VScode settings. Code-&gt;Preferences-&gt;Settings-&gt;Text Editor-&gt;Formatting-&gt;Format On Save</p>
+</li>
+</ol>
+<h1><a class="header" href="#anatomy" id="anatomy">Anatomy</a></h1>
+<p>We’ve got a few tools to get to know</p>
+<ul>
+<li>rustup - manage tools and versions of toolchains</li>
+<li>rustc - rust compiler</li>
+<li>cargo - manage modules locally and remotely and drives rustc</li>
+</ul>
+<p>EXERCISE: Open a terminal and create a new package with <code>cargo new training</code> and go to that directory with <code>cd training</code></p>
+<p>Now we have a Cargo.toml which defines our project, not unlike a package.json if you're familiar with Node.js, it defines dependencies we're using and other project information:</p>
+<pre><code class="language-toml">[package]
+name = &quot;training&quot;
+version = &quot;0.1.0&quot;
+authors = [&quot;First Last&quot;]
+edition = &quot;2018&quot;
+
+[dependencies]
+</code></pre>
+<p>In src folder we have main.rs, a Rust file. In this case it generated a simple hello world. </p>
+<pre><pre class="playpen"><code class="language-rust">fn main() {
+    println!(&quot;Hello, world!&quot;);
+}
+</code></pre></pre>
+<p>We're starting to get some syntax for you. Notice functions are denoted <code>fn</code>, we use semicolons to end expressions, and the exclamation after <code>println!()</code> means that is a function-like macro. We'll talk more about <a href="https://doc.rust-lang.org/book/ch19-06-macros.html">macros</a> later.</p>
+<p>Generally we'll interact with the compiler via Cargo. Cargo drives the rustc compiler and linker all under the hood. We can <code>cargo build</code> or better yet <code>cargo run</code> and save ourselves a step:</p>
+<pre><code class="language-bash">$ cargo run
+   Compiling training v0.1.0 (/Users/firstlast/training)
+    Finished dev [unoptimized + debuginfo] target(s) in 0.50s
+     Running `/Users/firstlast/.cache/target/debug/training`
+Hello, world!
+</code></pre>
+<p>The default build directory is target, and by default we got a debug build</p>
+<pre><code class="language-bash">$ ls target/debug/
+build		examples	native		training.d
+deps		incremental	training	training.dSYM
+</code></pre>
+<p>Note, we could run or debug that built asset directly:</p>
+<pre><code class="language-bash">./target/debug/training
+Hello, world!
+</code></pre>
+<p>Also note, we could have compiled this simple file with the rustc compiler directly</p>
+<pre><code class="language-bash">$ rustc src/main.rs
+$ ./main
+Hello, world!
+</code></pre>
+<p>However in practice almost no projects are single files require merging multiple modules from within our project and without and thus Cargo is THE way we interact with Rust.</p>
+<h1><a class="header" href="#data-types" id="data-types">Data types</a></h1>
+<p>We’ve got all the datatypes you would expect but you might want to glance through the Rust book <a href="https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html">chapter on variables, functions, and control flow</a> just to update your mental models to Rust notation</p>
+<p>We have signed and unsigned scalar types like u32 and i32 and we've got Strings. Variables are instantiated with let syntax, and notably are immutable by default.</p>
+<p>The top of the <a href="https://doc.rust-lang.org/std/">Rust standard library page</a> has a search box. Entering String there we find <a href="https://doc.rust-lang.org/std/string/struct.String.html#method.from">std::string::String</a> with a bunch of example usage right there for us. You can edit those examples and run them right in your browser to confirm your understanding and even click the [src] link in the upper right corner and be taken straight to the Rust implementation.</p>
+<blockquote>
+<p>While you totally can thrash around on stack overflow, and we all do, there really is an authoritative source that you should check first.</p>
+</blockquote>
+<p>From that example we have our String constructor:</p>
+<pre><pre class="playpen"><code class="language-rust no_run">fn main() {
+    let input_path = String::from(&quot;cat.jpg&quot;);
+    println!(&quot;Hello, world!&quot;);
+}
+</code></pre></pre>
+<p>First, note we don’t need to import anything (we call it <code>use</code>) to use this type. A portion of the standard library is in our namespace automatically, which we call the <a href="https://doc.rust-lang.org/std/prelude/index.html">prelude</a>. Basically Rust puts <code>use std::prelude::v1::*;</code> at the top of your file and you get access to those members. By no means is everything in there, but a lot is, which is what kept you from explicitly writing <code>use std::string::String</code> at the top of your file in this case.</p>
+<p>Also notice we didn't have to explicitly type our variable. What Rust <em>can</em> figure it out, <em>it will</em> and so its entirely idiomatic to omit type annotations. However if you or the compiler are having trouble or getting odd type errors, start annotating some of your types like to see if you can give the compiler a hand. Its also a great way to figure out what type you actually have in case you're not sure, let the compiler (or linter) tell you.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let input_path = String::from(&quot;cat.jpg&quot;);
+    let output_path:String = String::from(&quot;out.png&quot;);
+    println!(&quot;Hello, world!&quot;);
+}
+</code></pre></pre>
+<p>So now how to print those variables to console.  In Rust our printf <code>%</code> formatting character is <code>{}</code>. Following the <code>println!()</code> documentation down the rabbit hole will send us to the <a href="https://doc.rust-lang.org/std/fmt/index.html">formatters section</a> page and we find all the formatters which you would expect like hex <code>{:x}</code>, binary <code>{:b}</code>, etc. We're going to focus on the 'empty' Display formatter <code>{}</code> for now which is a kind of a pretty printer in Rust. As long as whomever wrote our type implemented the Display pretty printer trait this will work great (cue ominous music).</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let input_path = String::from(&quot;cat.jpg&quot;);
+    let output_path = String::from(&quot;out.png&quot;);
+    println!(&quot;{} {}&quot;, input_path, output_path);
+}
+</code></pre></pre>
+<p>Running this we find that we do have a Display implementation for String and pretty printing results in rather clean output in this case:</p>
+<pre><code class="language-text">cat.jpg out.png
+</code></pre>
+<p>Objects, we call them structs, should be very familiar. You can define a new struct in any scope you like and we can name and type their members.</p>
+<pre><pre class="playpen"><code class="language-rust editable">struct Opt {
+    input_path: String,
+    output_path: String,
+}
+
+fn main() {
+
+    let options = Opt {
+        input_path: String::from(&quot;cat.jpg&quot;),
+        output_path: String::from(&quot;out.png&quot;),
+    };
+
+    println!(&quot;{} {}&quot;, options.input_path, options.output_path);
+}
+</code></pre></pre>
+<p>EXERCISE: Get this all implemented in your training project</p>
+<p>Notice we access our struct members with dot notation, and there is no default new constructor or overloading in Rust. Though in practice, for functions where it makes sense many developers will offer and occasionally make their struct private to require the usage of a new or other constructor. So note, <code>String::new()</code> totally exists and would have made you an empty string.</p>
+<p>Lets start modularizing our main by putting our options creation in a function. Function syntax is just like we see in the main function, but can return an expression from a function by leaving off the semicolon and annotating the return type:</p>
+<pre><pre class="playpen"><code class="language-rust editable">struct Opt {
+    input_path: String,
+    output_path: String,
+}
+
+fn options() -&gt; Opt {
+
+    let options = Opt {
+        input_path: String::from(&quot;cat.jpg&quot;),
+        output_path: String::from(&quot;out.png&quot;),
+    };
+    return options;
+}
+
+fn main() {
+    let options = options();
+    println!(&quot;{} {}&quot;, options.input_path, options.output_path);
+}
+</code></pre></pre>
+<p>We use semicolons to end expressions. We prefer to leave off semicolons in order to implicitly return the expression saving us the temporary variable like so:</p>
+<pre><code class="language-rust ignore no_run">fn options() -&gt; Opt {
+
+    Opt {
+        input_path: String::from(&quot;cat.jpg&quot;),
+        output_path: String::from(&quot;out.png&quot;),
+    }
+}
+</code></pre>
+<p>EXERCISE: Implement the <code>options()</code> function to clean up your main.</p>
+<p>But what if our options creation could fail? Lets talk about error handling in rust.</p>
+<h1><a class="header" href="#control-structures" id="control-structures">Control Structures</a></h1>
+<p>So you want a branch, eh? Rust will give you most of the familiar tools, and a few improved tools.</p>
+<h2><a class="header" href="#if" id="if">If</a></h2>
+<p>Notice, there are no required parentheses around the predicate (the compiler will gently warn you if you unnecessarily put them there). Comparison operators are nearly identical with C/C++.</p>
+<p><a href="https://doc.rust-lang.org/book/appendix-02-operators.html">Rust operator reference</a></p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    if 1 + 1 == 2 {
+        println!(&quot;It's true!&quot;);
+    } else if 1 + 1 == 3 {
+        println!(&quot;This world is quite odd...&quot;);
+    } else {
+        println!(&quot;What has the world come to?&quot;);
+    }
+}
+</code></pre></pre>
+<h3><a class="header" href="#if-is-an-expression" id="if-is-an-expression">If is an expression!</a></h3>
+<p>Rust differs from C/C++ in that <code>if</code>, and other control flow structures, are also expressions that evaluate to a value. For example, the below <code>if</code> statement conditionally returns one of two strings. Notice that there are no semicolons after the return values, just like function return values.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    println!(&quot;The world is {}&quot;,
+        if 1 + 1 == 2 {
+            &quot;sane&quot;
+        } else {
+            &quot;insane&quot;
+        });
+}
+</code></pre></pre>
+<p>This <code>if</code> expression behaves much like the ternary operator in C/C++, but also allows you to have multiple <code>else if</code> predicates without nesting.</p>
+<p>Control flow statements in Rust evaluate to a value, even if you are not using that value. If you end a branch with <code>;</code>, the return value will be <code>()</code>, the same as a function without a specified return value. Therefore, all the possible evaluations of the control structure need to return the same type. For example, the below code will not compile.</p>
+<pre><code class="language-rust editable ignore">fn main() {
+    if 1 + 1 == 2 {
+        println!(&quot;The world is sane.&quot;);
+    } else {
+        5
+    }
+}
+</code></pre>
+<p>It's quite common in Rust to see functions that look like below. The return value of the function is the evaluated value of the if expression.</p>
+<pre><pre class="playpen"><code class="language-rust">
+# #![allow(unused_variables)]
+#fn main() {
+fn square_if_over_10(i: i32) -&gt; i32 {
+    if i &gt; 10 {
+        i * i
+    } else {
+        i
+    }
+}
+#}</code></pre></pre>
+<h2><a class="header" href="#match" id="match">Match</a></h2>
+<p>When you would reach for a switch statement, match is what you want in Rust. Matching is incredibly powerful and combines boolean operators as well as the range syntax from before.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+
+    let number:u32 = 11;
+    // ^ Try some different values for `number`
+
+    match number {
+        1 | 2 =&gt; println!(&quot;one or two&quot;),
+        3...4 =&gt; println!(&quot;three or four&quot;),
+        // you can use block syntax as well
+        11 =&gt; {
+            println!(&quot;11&quot;);
+            println!(&quot;and only 11&quot;)
+        }
+        12..=44 =&gt; println!(&quot;12 to 44 inclusive&quot;),
+        // matching is exhaustive so if you miss a case Rust will complain
+        // or use catch all 'default' case
+        _ =&gt; println!(&quot;The rest&quot;),
+    }
+}
+</code></pre></pre>
+<h2><a class="header" href="#loop" id="loop">Loop</a></h2>
+<p>Rust provides an unconditional loop construct, equivalent to <code>while (true) { }</code> in C/C++. The loop can be broken with <code>break</code> or execution can skip to the next iteration with <code>continue</code>. Unlike C/C++ loops, and just like Rust <code>if</code> statements, loops evaluate to a value as well.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut i = 2;
+    let biggest = loop {
+        if i &gt; 50 {
+            break i / 2;
+        }
+        i *= 2;
+    };
+    println!(&quot;The biggest power of 2 less than 50 is {}&quot;, biggest);
+}
+</code></pre></pre>
+<p>Just like in the <code>if</code> statements above, <code>break;</code> evaluates to the type <code>()</code>, but <code>break 5;</code> evaluates to an integer type.</p>
+<h2><a class="header" href="#while" id="while">While</a></h2>
+<p>Rust's while loop looks familiar, minus the parentheses around the predicate.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut i = 2;
+    while i &lt; 50 {
+        i *= 2;
+    }
+    println!(&quot;The biggest power of 2 less than 50 is {}&quot;, i / 2);
+}
+</code></pre></pre>
+<h2><a class="header" href="#for" id="for">For?</a></h2>
+<p>Those above contrived loop examples seem like perfect cases for a for loop right? Well, <code>for</code> is one of the places that Rust takes a familiar control flow construct and completely rethinks how it should work. The below example might look more similar to Python and uses the <a href="https://doc.rust-lang.org/std/ops/struct.Range.html">range syntax</a></p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for i in 0..10 {
+        println!(&quot;{}&quot;, i);
+    }
+}
+</code></pre></pre>
+<p>There's a good reason they look similar too! Much like Python, iterators are use all over the place. You won't find the familiar <code>for ( ; ; ) {}</code> construct, but don't worry; Rust's iterators are vastly more powerful, and safe. The next section takes us on a deep dive into iterators.</p>
+<h1><a class="header" href="#option-and-result" id="option-and-result">Option and Result</a></h1>
+<p>Let's take our config options from the command line with runtime args instead of hard coding it at compile time. Search the standard library for <a href="https://doc.rust-lang.org/std/env/fn.args.html">args</a> finds args come in as a iterator of a collection. We'll talk about iterators later, but for now we can for loop over them, or get the <code>nth()</code> value. Just like C command line args the 0th argument is the name of the binary and the rest are your arguments. </p>
+<pre><code class="language-rust ignore no_run">use std::env; // explicit use (import) finally
+
+fn options() -&gt; Opt {
+
+    Opt {
+        input_path: env::args().nth(1).unwrap(),
+        output_path: env::args().nth(2).unwrap(),
+    }
+}
+</code></pre>
+<p>And then note you can pass args around cargo to the binary were trying to run like:</p>
+<pre><code class="language-bash">$ cargo run -- cat.jpg out.png
+    Finished dev [unoptimized + debuginfo] target(s) in 0.01s
+     Running `target/debug/training cat.jpg out.png `
+target/debug/training
+cat.jpg
+out.png
+</code></pre>
+<p>So what is this unwrap. The problem is the nth argument may or may not be there.. </p>
+<p>We have two related types commingled in <a href="https://doc.rust-lang.org/book/ch09-00-error-handling.html">error handling</a> in Rust. </p>
+<p>Rust doesn’t have exceptions, but rather the <a href="https://doc.rust-lang.org/std/result/index.html">Result type</a> which can be used to propagate either the error or the result and looks like this:
+<img src="./images/result.png" alt="Result Type" /></p>
+<p>And Rust doesn't have Null but rather the <a href="https://doc.rust-lang.org/std/option/enum.Option.html">Option type</a> which can be used to propagate either the value (Some), or the lack of one (None)
+<img src="./images/option.png" alt="Option Type" /></p>
+<p>Were going to skip Result here, as our <code>nth()</code> method returns an Option, but they’re very similar in how they’re handled as they’re both implemented as enums. We basically have three possibilities for dealing with both:</p>
+<h2><a class="header" href="#option-1-panic-unwrap-and-expect" id="option-1-panic-unwrap-and-expect">Option 1, panic! unwrap and expect</a></h2>
+<p>There <em>is</em> a minimal runtime in Rust, which means if were not careful we can and will blow up at runtime. This is called a panic and is handled in the panic handler, which on hosted platforms includes unwinding and backtraces. You can fire it on purpose with <code>panic!()</code> or by <code>unwrap()</code> on a None or Err value. </p>
+<p>EXERCISE: Run our program again, this time not passing any command line arguments</p>
+<pre><code class="language-text">thread 'main' panicked at 'called `Option::unwrap()` on a `None` value', src/libcore/option.rs:347:21
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace.
+</code></pre>
+<p>Explicitly panicing like we see above may very well be an option when the error is unrecoverable anyway like in examples like this where theres nothing intelligent we can do except maybe try to print a decent error message. If the error message needs help well often well use <code>.expect(&quot;Please enter an image file as the first option to this program&quot;)</code> instead of <code>unwrap()</code> in order to further refine the message.</p>
+<h2><a class="header" href="#option-2-return-it" id="option-2-return-it">Option 2, return it</a></h2>
+<p>Another option is to make it someone else’s problem by simply handing the Option or Result back up the chain. </p>
+<p>Theres even an early return helper for this, the <a href="https://doc.rust-lang.org/book/ch09-02-recoverable-errors-with-result.html#a-shortcut-for-propagating-errors-the--operator">? operator</a>. This was previously the <a href="https://doc.rust-lang.org/std/macro.try.html">try! macro</a> but that has been deprecated though you may still see it in code.</p>
+<p>Our <code>nth()</code> is an Option of Some or None so lets just hand an optional back up the chain to our main function. At least this way we can decide what to do with it there.</p>
+<pre><code class="language-rust ignore no_run">fn options() -&gt; Option&lt;Opt&gt; { //&lt;-return Option wrapping our Opt struct
+
+    Some(Opt { //&lt;-Now we wrap our good return in Some
+        input_path: env::args().nth(1)?, //&lt;-unwrap becomes ? early return of None
+        output_path: env::args().nth(2)?, //&lt;-unwrap becomes ? early return of None
+    })
+}
+</code></pre>
+<p>EXERCISE: Have our options function return an Option of Opt. But we still get an error up in main now.</p>
+<pre><code class="language-text">error[E0609]: no field `input_path` on type `std::option::Option&lt;Opt&gt;`
+  --&gt; src/main.rs:93:44
+</code></pre>
+<p>Were passing an Option back to main, but now we need to deal with it there</p>
+<h2><a class="header" href="#option-3-handle-it" id="option-3-handle-it">option 3, handle it</a></h2>
+<p>Someone has to do some control flow on this error somewhere.. Well thats actually not true, we can even return these from the main function where Rust will unwrap them behind the scenes and print the result, but generally if you can do control flow on your errors you should. </p>
+<p>We often will often match Options and Results with the <a href="https://doc.rust-lang.org/rust-by-example/flow_control/match.html">match pattern</a> which is very similar to an exhaustive switch statement.</p>
+<p>These two solutions are equivalent as they both panic if we don't get a good value. However you can easily see how you will be using match if you need to take some positive action on bad values.</p>
+<pre><code class="language-rust ignore no_run">let options = options().unwrap();
+
+println!(&quot;{} {}&quot;, options.input_path, options.output_path);
+</code></pre>
+<pre><code class="language-rust ignore no_run">if let options = match options() {
+    Ok(options) =&gt; options
+    Err(error) =&gt; panic!(error),
+};
+
+println!(&quot;{} {}&quot;, options.input_path, options.output_path);
+</code></pre>
+<p>EXERCISE: Implement one of these solutions to satisfy the Rust compiler.</p>
+<p>The Option type is actually an enum type so we lets take a full digression through enums and matching in the next section.</p>
+<h1><a class="header" href="#error-handling-playground" id="error-handling-playground">error handling playground</a></h1>
+<p>Its worth spending some time in the option result playground here to get your mind around all this</p>
+<pre><pre class="playpen"><code class="language-rust editable">use std::io::ErrorKind;
+
+fn main() {
+    let first_arg = Some(&quot;cat.jpg&quot;);
+    let second_arg: Option&lt;String&gt; = None;
+    let good_val: Result&lt;u32, std::io::ErrorKind&gt; = Ok(22);
+    let definitely_error: Result&lt;u32, std::io::ErrorKind&gt; = Err(ErrorKind::Other);
+
+    first_arg.unwrap();
+    good_val.unwrap();
+    //second_arg.unwrap(); // no good
+
+    //matching is exhaustive in order
+    match first_arg {
+        Some(val) =&gt; println!(&quot;first_arg: {}&quot;, val),
+        None =&gt; {
+            // you can block scope in here and do as much as needed
+            println!(&quot;third_arg&quot;);
+            println!(&quot;oops&quot;)
+        }
+    }
+
+    // as we've said, results are similar, just two different variants
+    match definitely_error {
+        Ok(val) =&gt; println!(&quot;cant image how we got here: {}&quot;, val),
+        Err(e) =&gt; println!(&quot;{:?}&quot;, e),
+    };
+
+    // the revealing/destructuring pattern is really handy occasionally
+    if let Some(val) = first_arg {
+        println!(&quot;Gotem {:?}!&quot;, val);
+    }
+
+    // theres also a ton of combinators
+    if good_val.is_ok() &amp;&amp; definitely_error.is_err() {
+        println!(&quot;some convoluted example here&quot;);
+    }
+}
+</code></pre></pre>
+<h1><a class="header" href="#traits" id="traits">traits</a></h1>
+<p>But hey this seems wordy, lets just print our whole struct in one formatter.</p>
+<pre><code class="language-rust ignore no_run">//println!(
+//    &quot;input_path:{} output_path:{}&quot;,
+//    options.input_path, options.output_path
+//);
+println!(&quot;{}&quot;, options);
+</code></pre>
+<p>Running this results in:</p>
+<pre><code class="language-text">error[E0277]: `Opt` doesn't implement `std::fmt::Display`
+  --&gt; src/main.rs:14:20
+   |
+14 |     println!(&quot;{}&quot;, options);
+   |                    ^^^^^^^ `Opt` cannot be formatted with the default formatter
+   |
+   = help: the trait `std::fmt::Display` is not implemented for `Opt`
+   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+   = note: required by `std::fmt::Display::fmt`
+
+error: aborting due to previous error
+
+For more information about this error, try `rustc --explain E0277`.
+error: Could not compile `training`.
+
+To learn more, run the command again with --verbose.
+</code></pre>
+<p>Thats actually really rather helpful error with a several ideas for fixing it. AND in this case if say you're offline and can't google for more information it even has another page or two of content if you run the <code>rustc --explain E0277</code> command it mentions! </p>
+<blockquote>
+<p>The compiler in Rust is almost always, really, actually, trying to tell you whats wrong, AND how to fix it. And if you find a case where it is not the Rust community would likely want to know how to make that error and the resulting action you should take more clear. </p>
+</blockquote>
+<p>For this exercise we choose to manually implement the Display trait.</p>
+<p>In Rust we stress composition over inheritance using <a href="https://doc.rust-lang.org/book/ch10-02-traits.html">traits</a>. Traits, much like header files, separate the definition from the implementation. Before we solve our actual Display problem by consuming someone else’s trait definition, lets make a convoluted example to illustrate the syntax. We'll make a silly trait that has one function so that <code>println!</code> SHOUTS our filenames.</p>
+<pre><code class="language-rust ignore no_run">// create the new trait which has one function, shout
+pub trait Shout {
+    // we automatically get passed whatever variable function is called
+    // on as the first argument to the function, we generally call it self
+    fn shout(self);
+}
+
+// now implement the new trait you made
+// since we're impl for Opt, self is an Opt and we have access to
+// input_path and output_path
+impl Shout for Opt {
+    fn shout(self) {
+        println!(
+            &quot;{} {}&quot;,
+            self.input_path.to_uppercase(),
+            self.output_path.to_uppercase()
+        );
+    }
+}
+</code></pre>
+<p>Now anytime this trait is in namespace, which in our case it is because it defined in this same file, it is available on all instances of Opt. Lets call it:</p>
+<pre><code class="language-rust ignore no_run">//println!(&quot;{}&quot;, options);
+options.shout();
+</code></pre>
+<p>and well should see something like</p>
+<pre><code class="language-text">CAT.JPG OUT.PNG
+</code></pre>
+<blockquote>
+<p>The separation of definition from implementation is incredibly powerful. This way if we make our trait public anyone downstream can customize our function for their architecture or edge case. This keeps Rust from amongst other things passing around huge config structs full of lifecycle callbacks and other configuration overrides.</p>
+</blockquote>
+<p>Back to our real problem. As a reminder rustc said</p>
+<pre><code class="language-text">   = help: the trait `std::fmt::Display` is not implemented for `Opt`
+</code></pre>
+<p>Looking in the std documentation we find <a href="https://doc.rust-lang.org/std/fmt/trait.Display.html">Display</a> which shows us an example like below.
+<img src="./images/displaytrait.png" alt="Display Trait Example" /></p>
+<p>Recall when we implement traits, the function definition was set in stone by the trait.  (Note: We're still punting on the &amp; and &amp;mut until the borrowing chapter, but it doesn't matter here as the function definition is set in stone by the trait)
+In this case they pass us self (whatever type this method was called on, in this case Point, in our case Opt) and a second arg name f which well use the write! (just like <code>println!</code> except it sticks the output in its first argument) to print into.</p>
+<p>We're only responsible for the implementation of the method. In the case of this Display trait that freedom largely pertains to which arguments and how we would like to insert them into the format string.</p>
+<p>EXERCISE: Implement <code>fmt::Display</code> for <code>Opt</code> just like the example above did for Point so that this runs successfully</p>
+<pre><code class="language-rust ignore no_run">println!(&quot;{}&quot;, options);
+</code></pre>
+<p>And with that you've:</p>
+<ul>
+<li>created a new type and defined and implemented traits for it</li>
+<li>implemented a trait you didn’t own.</li>
+<li>but there's a third case you'll come across which is wanting to implement a trait you don't own on a type you don't own. </li>
+</ul>
+<blockquote>
+<p>For various reasons, the compiler can't reason about these 'orphan rules' and doesn't allow them.  There are many ways around the limitation including forking the underlying crate and <a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#overriding-dependencies">overriding dependencies</a> with Cargo patch functionality as well as the newtype pattern.</p>
+</blockquote>
+<h1><a class="header" href="#external-dependencies-cratesio" id="external-dependencies-cratesio">external dependencies, crates.io</a></h1>
+<p>Lets have our code load in an image from the filesystem. Searching in the standard library for images doesn't find anything, we could take a File to binary, but lets go to the community ecosystem, <a href="https://www.crates.io">crates.io</a>. Searching there for images finds a crate image with ~1mil downloads which seems to be pretty popular. <a href="https://crates.io/crates/image">image</a> says it wants us to add it to our Cargo.toml dependencies section so lets do that.</p>
+<pre><code class="language-toml">[dependencies]
+image = &quot;0.22.1&quot;
+</code></pre>
+<p>Then in whatever file we can use this dependency:</p>
+<pre><code class="language-rust ignore">use image;
+</code></pre>
+<p>The Cargo toml manifest version field is described here https://doc.rust-lang.org/cargo/reference/manifest.html#the-version-field where we learn Cargo uses <a href="https://semver.org">semantic versioning</a> which allows us to version and lock dependencies at the level of risk were comfortable with. From the spec:</p>
+<pre><code class="language-text">Given a version number MAJOR.MINOR.PATCH, increment the:
+
+MAJOR version when you make incompatible API changes,
+MINOR version when you add functionality in a backwards compatible manner, and
+PATCH version when you make backwards compatible bug fixes.
+</code></pre>
+<p>The <a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html">Cargo chapter on dependencies</a> explains more how to do this locking. The three digit version we used above is the same as a <a href="https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#caret-requirements">caret requirement</a> as if we had type <code>image = &quot;^0.22.1&quot;</code>. With this requirement Cargo is allowed to use any version it can satisfy between the range <code>&gt;=0.22.1 &lt;0.3.0</code> Semver works different below and above 1.0 with the idea that theres more breaking churn below 1.0. So for a fictional <code>image = &quot;^1.2.3&quot;</code> Cargo would be allowed to find patches <code>&gt;=1.2.3 &lt;2.0.0</code>. Refer to the spec and the book for many more clarifying examples.</p>
+<p>The most restrictive version would be <code>image = &quot;= 0.22.1</code> which would not allow cargo any update capability. This can be handy for to make production code reproducible. Further along that line the resolved version state of all your dependencies (recursively) is captured in the Cargo.lock file and for binaries like ours can and should be checked into the repository. This way even if you're not locking the version explicitly you're still tracking and reviewing the upstreaming of all version changes. Finally, and outside of scope here you may also use <a href="https://doc.rust-lang.org/stable/cargo/commands/cargo-vendor.html">cargo vendor</a> to download all your dependencies locally and check them into your repository and or you may host your own <a href="https://doc.rust-lang.org/cargo/reference/registries.html">alternate registry</a> in which you only publish vetted versions.</p>
+<h1><a class="header" href="#enum" id="enum">Enum</a></h1>
+<p>So we’ve seen enums are good at constraining a type between a limited set of values and they can also hold values, like an error or a type, which makes them algebraic datatypes. Rust Enums are liked <a href="http://patshaughnessy.net/2018/3/15/how-rust-implements-tagged-unions">tagged unions for the C</a> folks but implemented in such a way that you cant hurt yourself.</p>
+<p>TODO have craig go on and on about enums</p>
+<p>Looking through the image documentation, we can <a href="https://docs.rs/image/0.22.1/image/fn.open.html">open an image</a>, get back a ImageResult containing a <a href="https://docs.rs/image/0.22.1/image/enum.DynamicImage.html">DynamicImage type</a>.</p>
+<pre><code class="language-rust ignore no_run">//just unwrap our Result as written we have to have a value or we would have already blown up
+let img = image::open(options.input_path).unwrap();
+</code></pre>
+<p>Then we can use any of the many handy methods including a <a href="https://docs.rs/image/0.22.1/image/enum.DynamicImage.html#method.resize">resize method</a> Authors tend to reach for enums often in constraining input to functions. Here FilterType Enum could be one of the following sampling filter:
+<img src="./images/filtertype.png" alt="Filter Type" /></p>
+<p>So something like</p>
+<pre><code class="language-rust ignore no_run">//using the same variable name, called shadowing, is often even encouraged, as it means less messy temporary variables.
+let img = img.resize(32, 32, FilterType::Nearest);
+</code></pre>
+<p>before finally saving out like:</p>
+<pre><code class="language-rust ignore no_run">img.save(options.output_path).unwrap();
+</code></pre>
+<p>EXERCISE: Finding a cat picture and assembling the pieces is left as a exercise for reader.</p>
+<p>So obviously we'd like to take resize from the command line, which means wed like a match statement to go from a command line argument String to a FilterType Enum, and we need to update our Opt struct to hold it. Wed like to resize based on command line input constrained to one of these types.
+Naively we could implement the following:</p>
+<pre><code class="language-rust ignore no_run">use std::env;
+
+struct Opt {
+    input_path: String,
+    output_path: String,
+    scale_filter: FilterType,
+}
+
+fn options() -&gt; Option&lt;Opt&gt; {
+    let filter_string = env::args().nth(3)?;
+
+    //we actually match on a as_ref borrow of the String
+    let filter = match filter_string.as_ref() {
+        &quot;nearest&quot; =&gt; FilterType::Nearest,
+        &quot;triangle&quot; =&gt; FilterType::Triangle,
+        &quot;catmullrom&quot; =&gt; FilterType::CatmullRom,
+        &quot;gaussian&quot; =&gt; FilterType::Gaussian,
+        &quot;lanczos3&quot; =&gt; FilterType::Lanczos3,
+        _ =&gt; panic!(&quot;uhh I don’t know that filter&quot;),
+    };
+
+    Some(Opt {
+        input_path: env::args().nth(1)?,
+        output_path: env::args().nth(2)?,
+        scale_filter: filter,
+    })
+}
+
+fn main() {
+    let options = options().unwrap();
+    println!(&quot;{}&quot;, options);
+}
+</code></pre>
+<p>Which is totally workable but we can do one better, we can even write traits for enums which would be a clever solution to this problem. Lets abstract all that matching code into a trait. </p>
+<p>Heres a trait definition:</p>
+<pre><code class="language-rust ignore no_run">trait FilterString {
+    fn from_str(input: String) -&gt; Option&lt;FilterType&gt;;
+}
+</code></pre>
+<p>and the usage</p>
+<pre><code class="language-rust ignore no_run">fn options() -&gt; Option&lt;Opt&gt; {
+    let filter_string = env::args().nth(3)?;
+
+    Some(Opt {
+        input_path: env::args().nth(1)?,
+        output_path: env::args().nth(2)?,
+        scale_filter: FilterType::from_str(filter_string)?,
+    })
+}
+</code></pre>
+<p>EXERCISE: Now finish out the the FilterString impl to make all this work</p>
+<h1><a class="header" href="#enum-playground" id="enum-playground">enum playground</a></h1>
+<p>You've started to acquaint yourself with matching in the previous sections but enums with <a href="https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html#destructuring-nested-structs-and-enums">destructuring</a> and <a href="https://doc.rust-lang.org/book/ch18-03-pattern-syntax.html#extra-conditionals-with-match-guards">match guards</a> is so powerful it is worth revising in this altered example from the <a href="https://doc.rust-lang.org/book/ch06-02-match.html">Rust book on matching</a></p>
+<pre><pre class="playpen"><code class="language-rust editable">enum UsState {
+    Alabama,
+    Alaska,
+}
+
+//enums can contain any other type
+enum Coin {
+    Penny,
+    Nickel(u32),
+    Dime(String),
+    Quarter(UsState),
+}
+
+fn value_in_cents(coin: Coin) -&gt; u8 {
+    //you can match on any combination of your enum
+    match coin {
+        Coin::Penny =&gt; 1,
+        Coin::Nickel(date) if date &lt; 1930 =&gt; 50,
+        Coin::Nickel(_) =&gt; 5,
+        Coin::Dime(ref text) if text == &quot;scratched&quot; =&gt; 5,
+        Coin::Dime(text) =&gt; {
+            println!(&quot;{}&quot;, text);
+            10
+        }
+        Coin::Quarter(UsState::Alaska) =&gt; {
+            println!(&quot;State quarter from Alaska&quot;);
+            25
+        }
+        Coin::Quarter(_state) =&gt; {
+            println!(&quot;State quarter from elsewhere&quot;);
+            25
+        }
+    }
+}
+
+fn main() {
+    println!(&quot;{}&quot;, value_in_cents(Coin::Quarter(UsState::Alabama)));
+    println!(&quot;{}&quot;, value_in_cents(Coin::Dime(String::from(&quot;scratched&quot;))));
+    println!(&quot;{}&quot;, value_in_cents(Coin::Dime(String::from(&quot;A+&quot;))));
+    println!(&quot;{}&quot;, value_in_cents(Coin::Nickel(1921)));
+    println!(&quot;{}&quot;, value_in_cents(Coin::Nickel(2000)));
+}
+</code></pre></pre>
+<p>You may ask is this just a toy example? But think back to our filter example. Lets say FilterType also took a f32 as some kind of compression ratio and a few more arguments. Now you've got 2 or 3 arguments to a function and or now you're creating a filter config struct and a validate function with a bunch of if statements to try to catch all the possible improper configurations, and probably a bunch of tests to make sure it can't be used incorrectly. Algebraic Enums wrapping all the necessary data to make that constrained selection work and match statements does almost all of that for us. Reach for Algebraic enums and match statements like this whenever you would reach for a configuration struct and some kind of validate function.</p>
+<h1><a class="header" href="#borrowing" id="borrowing">Borrowing</a></h1>
+<p>The borrow checker is probably Rust's most distinctive feature. To enable zero cost abstractions, Rust does not have a garbage collector. However, Rust also doesn't rely on explicit calls to <code>free()</code> like C. Instead Rust enforces &quot;ownership&quot; for all memory objects. The rules of the ownership system are pretty simple:</p>
+<ol>
+<li>
+<p>There is only ever one owner of a memory object at a time (struct, enum, primitive, etc)</p>
+</li>
+<li>
+<p>Immutable (read-only) ownership can be borrowed multiple places simultaneously</p>
+</li>
+<li>
+<p>Mutable (writable) ownership can only be borrowed once at a time and exclusively</p>
+</li>
+<li>
+<p>An object must live at least as long as all of its borrows</p>
+</li>
+</ol>
+<h2><a class="header" href="#rule-1-single-owner" id="rule-1-single-owner">Rule #1: single owner</a></h2>
+<pre><pre class="playpen"><code class="language-rust editable ignore mdbook-runnable">fn eat(s: String) {
+    println!(&quot;Eating {}&quot;, s);
+}
+
+fn main() {
+    let food = String::from(&quot;salad&quot;);
+    eat(food);
+    eat(food);
+}
+</code></pre></pre>
+<p>The compiler error tells us exactly what's wrong. The <code>fn eat(s: String)</code> signature says that <code>s</code> will be moved into the function upon calling. In other words, the function <code>eat</code> will take ownership of <code>s</code>. Unless we pass ownership back to the caller, ownership will remain there. This is called &quot;consuming&quot; a parameter.</p>
+<p>Here's how we can pass ownership back:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn eat(s: String) -&gt; String {
+    println!(&quot;Eating {}&quot;, s);
+    s
+}
+
+fn main() {
+    let food = String::from(&quot;salad&quot;);
+    let owned_food = eat(food);
+    eat(owned_food);
+}
+</code></pre></pre>
+<h2><a class="header" href="#rule-2-multiple-immutable-borrows" id="rule-2-multiple-immutable-borrows">Rule #2: multiple immutable borrows</a></h2>
+<p>If we change the function signature to borrow <code>s</code> instead, the problem goes away.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn stare_at(s: &amp;String) {
+    println!(&quot;Drooling over {}&quot;, s);
+}
+
+fn main() {
+    let food = String::from(&quot;donut&quot;);
+    let another_ref = &amp;food;
+    stare_at(&amp;food);
+    stare_at(&amp;food);
+    stare_at(another_ref);
+}
+</code></pre></pre>
+<h2><a class="header" href="#rule-3-mutable-borrows-are-exclusive" id="rule-3-mutable-borrows-are-exclusive">Rule #3: mutable borrows are exclusive</a></h2>
+<p>Only a mutable borrow for an object can exist at a time. This prevents many subtles errors where internal state is mutated while other does not expect it. In C++, modifying a container while iterating through it is a classic example.</p>
+<pre><pre class="playpen"><code class="language-rust editable ignore mdbook-runnable">fn main() {
+    let mut number: usize = 32;
+
+    let borrowed = &amp;number;
+    println!(&quot;Borrowed: {}&quot;, borrowed);
+
+    let mut_borrowed = &amp;mut number;
+    *mut_borrowed = 59;
+    println!(&quot;Mut borrowed: {}&quot;, mut_borrowed);
+    println!(&quot;Borrowed: {}&quot;, borrowed);
+}
+</code></pre></pre>
+<p>You'll notice the compiler gave us an error because we have an immutable borrow out there when we try to mutably borrow number. Any additional borrows, mutable or not, will make a mutable borrow invalid.</p>
+<p>When we have an exclusive mutable borrow, all is good.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut number: usize = 32;
+
+    let mut_borrowed = &amp;mut number;
+    *mut_borrowed = 59;
+    println!(&quot;Mut borrowed: {}&quot;, mut_borrowed);
+}
+</code></pre></pre>
+<h2><a class="header" href="#rule-4-lifetime--borrow-time" id="rule-4-lifetime--borrow-time">Rule #4: lifetime &gt;= borrow time</a></h2>
+<p>In the example below, we borrow a temporary value inside the if statement branches. The temporary value does not last beyond the if statement branch, so the compiler tells us that our borrow is invalid. We can't borrow an object that doesn't exist.</p>
+<pre><pre class="playpen"><code class="language-rust editable ignore mdbook-runnable">fn main() {
+    let borrowed = if 1 + 1 == 2 {
+        let msg = &quot;The world is sane.&quot;;
+        &amp;msg
+    } else {
+        let msg = &quot;The world is insane!&quot;;
+        &amp;msg
+    };
+}
+</code></pre></pre>
+<h2><a class="header" href="#the-learning-curve" id="the-learning-curve">The learning curve</a></h2>
+<p>Many new Rustaceans report that the fighting the borrow checker is the hardest part of learning Rust, and kind of like hitting a wall. Programmers coming from C/C++ tend to have a hard time because they know exactly what they want to do, but the Rust compiler &quot;won't let them do it&quot;.</p>
+<p>Over time, the borrowing rules and working with the borrow checker become second nature. In fact, the borrow checker enforces rules that well-written C++ code should abide by anyway. Working with the borrow checker is kind of like pair programming with a memory ownership expert.</p>
+<p>The borrowing rules prevent all kinds of common C++ memory and security errors. For example, you can't create a dangling borrow, the compiler won't let you. In C/C++, you can quite easily create a dangling pointer!</p>
+<h2><a class="header" href="#cloning" id="cloning">Cloning</a></h2>
+<p>While you are learning Rust, you will face another temptation: clone everything! The <code>Clone</code> trait in Rust provides the method <code>clone()</code> which creates a copy of any objects that implements <code>Clone</code>. When something is cloned, the borrows on the original do not apply to the new copy.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut number: usize = 32;
+
+    let cloned = number.clone();
+    println!(&quot;Cloned: {}&quot;, cloned);
+
+    let mut_borrowed = &amp;mut number;
+    *mut_borrowed = 59;
+    println!(&quot;Mut borrowed: {}&quot;, mut_borrowed);
+    println!(&quot;Cloned: {}&quot;, cloned);
+}
+</code></pre></pre>
+<h2><a class="header" href="#lifetimes-and-scopes" id="lifetimes-and-scopes">Lifetimes and scopes</a></h2>
+<p>One last thing to note about lifetimes is that they are tied to scopes. So a borrow must exist in a scope at or below the level of the ownership.</p>
+<pre><pre class="playpen"><code class="language-rust editable ignore mdbook-runnable">fn main() {
+    let mut number: usize = 32;
+    {
+        let borrowed = &amp;number; // works!
+        println!(&quot;It works: {}&quot;, borrowed);
+    }
+
+    {
+        let number2: usize = 64;
+    }
+    let borrowed2 = &amp;number2; // fails!
+}
+</code></pre></pre>
+<p>Also, Rust allows a scope to return a value. This is useful for temporarily borrowing a value in a limited scope and computing some value without creating a whole separate function for it.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let number: usize = 32;
+    let new_number = {
+        let borrowed = &amp;number;
+        borrowed + 16
+    };
+    println!(&quot;{}&quot;, new_number);
+}
+</code></pre></pre>
+<p>Prior to Rust 2018 edition, it used to be common to use scopes to explicitly end borrows. The below code shows how we can use an extra scope (curly braces) to end a borrow early to allow a mutable borrow. With Rust 2018, the compiler is actually smart enough to detect this on its own, so we don't worry about it much unless you have a specific case the compiler can't figure out.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut number: usize = 32;
+
+    {
+        let borrowed = &amp;number;
+        println!(&quot;Borrowed: {}&quot;, borrowed);
+    } // borrow ends here
+
+    // no living borrows, so &amp;mut is ok!
+    let mut_borrowed = &amp;mut number;
+    *mut_borrowed = 59;
+    println!(&quot;Mut borrowed: {}&quot;, mut_borrowed);
+}
+</code></pre></pre>
+<h1><a class="header" href="#vec" id="vec">Vec</a></h1>
+<p><code>std::vec::Vec</code> is one of the most widely used data structures in Rust programs. It's even included in the prelude (no need to <code>use std::vec::Vec</code>). Vec is a contiguous growable array container, roughly equivalent to C++'s <code>std::vector</code>.</p>
+<p>Just like C++'s <code>std::vector</code>, <code>Vec</code> in Rust is generic over its contained type.</p>
+<pre><code class="language-rust ignore">pub struct Vec&lt;T&gt; {
+    ...
+}
+</code></pre>
+<p>At the surface level, Rust generics have a similar syntax to C++ generics. However, we'll soon see that the Rust type system makes using generics much different.</p>
+<p>For now, let's explore <code>Vec</code> a bit.</p>
+<h2><a class="header" href="#creating-vecs" id="creating-vecs">Creating Vecs</a></h2>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let v1 = Vec::&lt;i32&gt;::new();
+    let v2: Vec&lt;i32&gt; = Vec::new();
+    let v3: Vec&lt;i32&gt; = vec![];
+    let v4: Vec&lt;i32&gt; = vec![1, 2, 3, 4];
+}
+</code></pre></pre>
+<p>If the compiler can't infer the type parameter for a Vec, it will show you can error message:</p>
+<pre><code class="language-rust editable ignore">fn main() {
+    let v = vec![1, 2, 3, 4];
+}
+</code></pre>
+<p><code>1, 2, 3, 4</code> are valid literals for multiple integer types. We need to annotate the type parameter somewhere.</p>
+<h2><a class="header" href="#vec-operations" id="vec-operations">Vec operations</a></h2>
+<p><code>Vec</code> provides familiar methods for mutation:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let mut v: Vec&lt;i32&gt; = Vec::new();
+
+    v.push(5);
+    v.push(6);
+    println!(&quot;v: {:?}&quot;, v);
+
+    let popped = v.pop();
+    println!(&quot;popped: {:?}&quot;, popped);
+    println!(&quot;v: {:?}&quot;, v);
+
+    v.insert(0, 7);
+    println!(&quot;v: {:?}&quot;, v);
+
+    v.clear();
+    println!(&quot;v: {:?}&quot;, v);
+}
+</code></pre></pre>
+<p>As we'll see in the next section on iterators, mutating a <code>Vec</code> in-place is not always the best option in Rust.</p>
+<p>We can also grab a few properties of a Vec:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let v: Vec&lt;i32&gt; = vec![1, 2, 3, 4];
+    println!(&quot;{:?}&quot;, v.len());
+    println!(&quot;{:?}&quot;, v.is_empty());
+}
+</code></pre></pre>
+<h1><a class="header" href="#generics" id="generics">Generics</a></h1>
+<p>Rust generics aren't just for structs; they can be used for structs, functions, traits, and more. Let's look at a simple generic function:</p>
+<p>TODO: Simpler generics example without the type parameter.</p>
+<pre><code class="language-rust editable ignore">fn generic_add&lt;T&gt;(a: T, b: T) -&gt; T {
+    a + b
+}
+
+fn main() {
+    println!(&quot;{:?}&quot;, generic_add(1, 2))
+    println!(&quot;{:?}&quot;, generic_add(1.0, 2.0))
+}
+</code></pre>
+<p>Yup, this causes a compiler error. Unlike C++ templating, Rust generics are fully type-aware. In this case, since the type paramter <code>T</code> can be any type, how does the compiler know that the type implements the <code>+</code> operator?</p>
+<p>In fact, there is a way we can tell the compiler we only want to allow types with the <code>+</code> operator. In Rust, the <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code> and other operators are traits implemented by data types. So, if we tell the compiler that we want to only allow types that implement the <code>+</code> trait, called <code>Add</code>, it should work. So, we are constraining the type parameter to types that implement a trait.</p>
+<pre><pre class="playpen"><code class="language-rust editable">use std::ops::Add;
+
+fn generic_add&lt;T: Add&lt;Output=T&gt;&gt;(a: T, b: T) -&gt; T {
+    a + b
+}
+
+fn main() {
+    println!(&quot;{:?}&quot;, generic_add(1, 2));
+    println!(&quot;{:?}&quot;, generic_add(1.0, 2.0));
+}
+</code></pre></pre>
+<p>You may have also noticed <code>Output=T</code>, which is what's called a type parameter on a trait. Rust doesn't assume that addition results in the same type as the operands. In this case, we constrained our function to only types that implement <code>Add</code> that results in the same type.</p>
+<h1><a class="header" href="#iterators" id="iterators">Iterators</a></h1>
+<p>Iterators are one of the most powerful features in Rust! They are also a gateway drug to functional programming.</p>
+<p>The last example from the control flow section used a simple iterator, called a <code>Range</code> (similar to <code>range()</code> in Python).</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for i in 0..10 {
+        println!(&quot;{}&quot;, i);
+    }
+}
+</code></pre></pre>
+<h2><a class="header" href="#combinators" id="combinators">Combinators</a></h2>
+<p>The Rust standard library provides a large selection of combinators for use with iterators. Here's a whirlwind tour of a few important ones! You can find a full list in the <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">documentation for the Iterator trait</a>.</p>
+<p>The <code>map</code> method takes a closure to apply on each iterated element. It's the equivalent of running a given function on each element in the iterator and generating a new iterator of the return values.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for i in (0..10).map(|i| i * 2) {
+        println!(&quot;{}&quot;, i);
+    }
+}
+</code></pre></pre>
+<p>The <code>filter</code> method skips values that don't pass a predicate.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for (i, j) in (1..10).map(|i| (i, i * 3)).filter(|(i, j)| i % 2 == 0) {
+        println!(&quot;{} tripled is even: {}&quot;, i, j);
+    }
+}
+</code></pre></pre>
+<p><code>flat_map</code> iterates through iterators like n dimensional structures and concatenates them one after the other, or &quot;flattens&quot; them.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+
+    let v = vec![vec![0, 1], vec![14, 15], vec![4, 5]];
+
+    //flat_map gives a closure where we could transform, instead we just return it
+    for i in v.iter().flat_map(|j| j) {
+        println!(&quot;{:?}&quot;, i);
+    }
+}
+</code></pre></pre>
+<p><code>fold</code> combines all the values from an iterator, pairwise, starting with an initial value.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn factorial(n: i32) -&gt; i32 {
+    (1..n).fold(n, |x, y| x * y)
+}
+
+fn main() {
+    println!(&quot;5! = {}&quot;, factorial(5));
+}
+</code></pre></pre>
+<p>Note: Rust actually has a combinator just for multiplicative products <code>product()</code>, and for sums: <code>sum()</code>.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    let v: Vec&lt;usize&gt; = (0..5)
+        .map(|i| i * 2)
+        .collect();
+    println!(&quot;{:?}&quot;, v);
+}
+</code></pre></pre>
+<p>If you want even more combinators like these, make sure to check out the <a href="https://doc.rust-lang.org/std/iter/trait.Iterator.html">docs</a>. And, if you want even more combinators, checkout the <a href="https://docs.rs/itertools/0.8.0/itertools/">itertools</a> crate!</p>
+<h2><a class="header" href="#enumeration-combinator" id="enumeration-combinator">Enumeration combinator</a></h2>
+<p>Sometimes, you miss your familar C-style for loop with its convenient access to the index; but don't run away yet, Rust has the <code>enumerate()</code> combinator for just this problem. The Iterator trait provides a combinator, called <code>enumerate</code> just for this purpose (very similar to Python's <code>enumerate()</code>).</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for (index, value) in (100..110).enumerate() {
+        println!(&quot;{}: {}&quot;, index, value);
+    }
+}
+</code></pre></pre>
+<p>You might have noticed in the above example that <code>enumerate</code> changed the iterator elements from integers to tuples (which is why we use <code>for (index, value) ...</code>). When you chain iterators together, you can modify the type of the iterator element as you go.</p>
+<p>It's common to see code that keeps an index or other book-keeping info along with the value of interest in a tuple:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for (index, value) in (100..110)
+        .enumerate()
+        .map(|(i, v)| (i, v * 10))
+    {
+        println!(&quot;{}: {}&quot;, index, value);
+    }
+}
+</code></pre></pre>
+<h2><a class="header" href="#more-complex-iterators-with-changing-element-type" id="more-complex-iterators-with-changing-element-type">More complex iterators with changing element type</a></h2>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for (i, j, k) in (100..110) // type is usize
+        .enumerate() // type is now (usize, usize)
+        .map(|(i, j)| j * i) // type is now usize
+        .map(|v| (v, v * 10, 0)) // type is now (usize, usize, usize)
+    {
+        println!(&quot;{}, {}, {}&quot;, i, j, k);
+    }
+}
+</code></pre></pre>
+<h2><a class="header" href="#thinking-in-iterators" id="thinking-in-iterators">Thinking in iterators</a></h2>
+<p>You might be very familiar with this kind of nested for loop in C/C++:</p>
+<pre><code class="language-c ignore">for (int i = 0; i &lt; 3; i++) {
+    for (int j = 0; j &lt; 3; j++) {
+        compute_something(data[i, j]);
+    }
+}
+</code></pre>
+<p>There are multiple ways to express this loop in Rust using iterators, each with its own advantages. First, we can directly translate incrementing indices into rust <a href="https://doc.rust-lang.org/std/ops/struct.Range.html">Ranges</a>.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    for i in 0..3 {
+        for j in 0..3 {
+            println!(&quot;{}, {}&quot;, i, j);
+        }
+    }
+}
+</code></pre></pre>
+<p>Or, we can use iterator combinators to combine multiple ranges into a tuple for each element. This lets the computation code or body of the loop not care about how each element is generated. The elements of the combined iterator can be easily stored in a Vec, or broken up into chunks for parallel operation, or filtered by some predicate.</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    (0..3).for_each(|i|
+        (0..3).for_each(|j| println!(&quot;{}, {}&quot;, i, j)));
+}
+</code></pre></pre>
+<p>As a quick preview, this could be done in parallel across CPU cores with a simple change:</p>
+<pre><pre class="playpen"><code class="language-rust ignore mdbook-runnable">#extern crate rayon;
+use rayon::prelude::*;
+
+fn main() {
+    (0..3).into_par_iter()
+        .for_each(|i| (0..3).for_each(|j| println!(&quot;{}, {}&quot;, i, j)));
+}
+</code></pre></pre>
+<p>Notice that the output order changes when we re-run the example, since the computation is distributed across multiple cores. We'll talk more about parallel iterators soon.</p>
+<h2><a class="header" href="#move-closures" id="move-closures">Move closures</a></h2>
+<p>In a lot of Rust code, you never have to worry about move your local variables get captured into a closure (environment capture). However, it does seem to pop-up more often when working on complicated iterator chains. For example:</p>
+<pre><pre class="playpen"><code class="language-rust editable">fn main() {
+    (0..3).flat_map(|i|
+        (0..3).map(move |j| (i, j)))
+        .for_each(|idx| println!(&quot;{:?}&quot;, idx));
+}
+</code></pre></pre>
+<p>What's that <code>move</code> keyword doing? Let's check out the compiler output without it.</p>
+<pre><code class="language-ignore">error[E0373]: closure may outlive the current function, but it borrows `i`, which is owned by the current function
+ --&gt; src/main.rs:2:36
+  |
+2 |     (0..3).flat_map(|i| (0..3).map(|j| (i, j)))
+  |                                    ^^^  - `i` is borrowed here
+  |                                    |
+  |                                    may outlive borrowed value `i`
+  |
+note: closure is returned here
+ --&gt; src/main.rs:2:25
+  |
+2 |     (0..3).flat_map(|i| (0..3).map(|j| (i, j)))
+  |                         ^^^^^^^^^^^^^^^^^^^^^^
+help: to force the closure to take ownership of `i` (and any other referenced variables), use the `move` keyword
+  |
+2 |     (0..3).flat_map(|i| (0..3).map(move |j| (i, j)))
+  |                                    ^^^^^^^^
+</code></pre>
+<p>Basically, the compiler needs to know that the when <code>j</code> is moved into the inner closure that single-ownership is not violated. When we write <code>move</code> it indicates that the ownership is now inside the closure, and that the outer code will not use the moved values. This contrasts with the default closure capture where the variables are borrowed. In this case, borrowing doesn't work because <code>i</code> is only temporary.</p>
+<p>For our example with inegers, it makes no difference. But, if we'ire iterating over large data structures with complicated internal state, it makes a huge difference. Lucky for us, the compiler error points out exactly what we need to do. As you write more Rust, you will start to get a feel for the <code>move</code> closure, but in the beginning, the compiler really helps point out what we need to do.</p>
+<h1><a class="header" href="#image-processing-example" id="image-processing-example">Image Processing Example</a></h1>
+<p>It's time now; we're going to build a bigger example project.</p>
+<p>For this example we're going to build a simple utility for applying the <a href="https://en.wikipedia.org/wiki/Sobel_operator">Sobel operator</a> to an input image and outputting the image. What's the Sobel operator? It's one of several methods for highlighting edges in an image, and looks like this:</p>
+<p><img src="./images/valve.png" alt="Before Sobel" />
+<img src="./images/valve_sobel.png" alt="After Sobel" /></p>
+<p>The Sobel operator is represented as a kernel that is convolved with an image to produce the output. <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)#Convolution">Convolving a kernel with an image</a> is an incredibly common operation in all kinds of image processing.</p>
+<p>In our Sobel example, we will use the kernels below, which calculate estimates of the gradient: Gx and Gy. In an image, the gradient describes how fast the color of the image is changing in a direction, X and Y in this case. Typically, edges change very quickly, so if we output the gradient of the image, we expect the edges to have high values.</p>
+<p>In these equations, Gx and Gy are the gradients (how fast the color is changing) in the X and Y directions. The matrix is the kernel and A is the block of pixels we're convolving with the kernel.</p>
+<p><img src="./images/sobel_eq.svg" alt="Sobel kernel equations" /></p>
+<p>That may sound complicated, but it boils down to this: multiply each pixel in the block (matrix A of pixel values) with the corresponding value in the kernel matrix, and then add up all the results.</p>
+<p>To do this for a whole image, we slide the matrix A around so that the pixel we're processing is the center.</p>
+<p>Let's get going!</p>
+<h2><a class="header" href="#input-parameters" id="input-parameters">Input parameters</a></h2>
+<p>To specify the input and output image paths, we'll parse args from <code>std::env::args()</code> using the same method we explored earlier.</p>
+<pre><pre class="playpen"><code class="language-rust editable ignore mdbook-runnable">use std::env;
+
+struct Opt {
+    input_path: String,
+    output_path: String,
+}
+
+fn options() -&gt; Option&lt;Opt&gt; {
+    Some(Opt {
+        input_path: env::args().nth(1)?,
+        output_path: env::args().nth(2)?,
+    })
+}
+
+fn main() {
+    let options = options().expect(&quot;Failed to parse command options!&quot;);
+}
+</code></pre></pre>
+<h2><a class="header" href="#loading-the-input-image" id="loading-the-input-image">Loading the input image</a></h2>
+<p>For now, let's just write the input to the output, passthrough, using the image create we looked at earlier.</p>
+<pre><code class="language-rust ignore">let input_image = image::open(&amp;options.input_path)
+    .expect(&quot;Failed to open input image file&quot;);
+
+input_image.save(&amp;options.output_path)
+    .expect(&quot;Failed to save output image to file&quot;);
+</code></pre>
+<h2><a class="header" href="#converting-to-grayscale-or-luma" id="converting-to-grayscale-or-luma">Converting to grayscale (or luma)</a></h2>
+<p>In order to apply our Sobel operator from above, we're going to need an image in grayscale, with one value per pixel. We also eventually need to the values to be floating-point, but first let's convert to grayscale. Converting an RGB image to grayscale requires specific weights per component, but luckily the image create already implements this for us. We just need to figure out how to use it. Let's take a look at the docs again.</p>
+<p><img src="./images/image-load-doc.png" alt="image::load docs" /></p>
+<h3><a class="header" href="#quick-look-at-custom-error-types-and-result-aliases" id="quick-look-at-custom-error-types-and-result-aliases">Quick look at custom error types and Result aliases</a></h3>
+<p>The <code>load</code> function returns an <code>ImageResult</code>. This is a custom Result enum in the image crate, which is just a shortcut for <code>Result&lt;DynamicImage, ImageError&gt;</code> where <code>ImageError</code> is another enum in the crate with all the possible errors.</p>
+<p>This pattern is pretty typical for crates, both to encapsulate their possible errors in one enum and to create a type alias for Result to simplify declarations. If you click on <code>ImageError</code> in the docs, you can see the detailed definition of the possible errors.</p>
+<p><img src="./images/image-err.png" alt="image::ImageError docs" /></p>
+<p>If you want to handle errors in specific ways, you can use a match statement. You can even ignore some errors if you want and just panic, usually only if you're writing an app, not a library. If you're writing a library, you typically want to encapsulate errors and pass them back to the caller for handling.</p>
+<pre><code class="language-rust ignore"># extern crate image; // once again, limitation of Rust playground
+
+fn main() {
+    let image = match image::open(&quot;filename.png&quot;) {
+        Err(image::ImageError::UnsupportedError(s)) =&gt;
+            panic!(&quot;Try a different format: {}&quot;, s),
+        Err(_) =&gt;
+            panic!(&quot;Failed to load image file!&quot;),
+        Ok(img) =&gt; img
+    };
+}
+</code></pre>
+<h3><a class="header" href="#to_luma-method" id="to_luma-method">to_luma() method</a></h3>
+<p>From looking at the <a href="https://docs.rs/image/0.22.1/image/enum.DynamicImage.html#method.to_luma">docs</a> on <code>image::open</code> we now know that it returns a <code>DynamicImage</code> type. If we peek at the <code>DynamicImage</code> docs we'll find a function called <code>to_luma()</code>, which is exactly what we want. Notice it returns a different type, <code>GrayImage</code>.</p>
+<p>Since types and abstractions in Rust don't incur overhead, it's pretty typically to use more types than less to represent different possible data structures and formats. This not only makes code clear to the reader, but also allows the compiler to help you enforce invariants.</p>
+<p>For example, we can make our processing code later only accept <code>GrayImage</code> as input, which makes sure the caller has converted any inputs.</p>
+<p><img src="./images/to_luma.png" alt="to_luma method" /></p>
+<pre><code class="language-rust ignore">let input_image = image::open(&amp;options.input_path)
+    .expect(&quot;Failed to open input image file&quot;);
+
+let gray_image = input_image.to_luma();
+
+gray_image.save(&amp;options.output_path)
+    .expect(&quot;Failed to save output image to file&quot;);
+</code></pre>
+<p>The output image should now look like:</p>
+<p><img src="./images/valve_gray.png" alt="Valve after to_luma" /></p>
+<h2><a class="header" href="#defining-the-kernels" id="defining-the-kernels">Defining the kernels</a></h2>
+<p>We can define the kernels multiple ways, but for now let's use a fixed size array of fixed size arrays. This preserves the row and column structure of the kernels. We'll use the const keyword to define these as constant, static data outside of any function. The compiler will not let us in any way mutate this data.</p>
+<pre><code class="language-rust ignore">/// Kernel for the Sobel operator in the X direction
+const SOBEL_KERNEL_X: [[f32; 3]; 3] = [
+    [-1.0, -2.0, -1.0],
+    [0.0, 0.0, 0.0],
+    [1.0, 2.0, 1.0]
+];
+
+/// Kernel for the Sobel operator in the Y direction
+const SOBEL_KERNEL_Y: [[f32; 3]; 3] = [
+    [-1.0, 0.0, 1.0],
+    [-2.0, 0.0, 2.0],
+    [-1.0, 0.0, 1.0]
+];
+</code></pre>
+<h2><a class="header" href="#convolution" id="convolution">Convolution</a></h2>
+<p>As we explored above, the convolution operator for a kernel and a block of pixels boils down to a pretty simple series of operations. First we multiple each value from the kernel matrix with its corresponding value in the block of pixels, and then, we sum up all the products. Usually, we also divide by a constant value to &quot;normalize&quot; the result (really just make sure it is within the 0.0-1.0 range). For the Sobel operator on a 3x3 block of pixels, a divisor of 8.0 works well.</p>
+<p>Let's start with the function signature:</p>
+<pre><code class="language-rust ignore">fn convolve(kernel: &amp;[[f32; 3]; 3], pixels: &amp;[[f32; 3]; 3]) -&gt; f32 {
+
+}
+</code></pre>
+<p>Notice that both the kernel and pixels are borrowed, not moved, since the kernel will be re-used for all pixels. At least while starting out in Rust, prefer borrowing to moving unless you have a good reason.</p>
+<p>Now it's time to put some meat into the function. Here we use <code>zip</code> to combine two iterators into one iterator that yields tuple elements. Since kernel and pixels are nested arrays, <code>kernel.iter()</code> and <code>pixels.iter()</code> both give iterators over elements of type <code>[f32; 3]</code>. So, the tuple parameter <code>(kernel_col, input_col)</code> has type <code>([f32; 3], [f32; 3])</code>. Therefore in the closure, we iterate and zip once again, to yield elements of type <code>(f32, f32)</code> that we can multiply together. Finally we use the sum combinator to add all the products up.</p>
+<pre><code class="language-rust ignore">fn convolve(kernel: &amp;[[f32; 3]; 3], pixels: &amp;[[f32; 3]; 3]) -&gt; f32 {
+    let accumulator: f32 = kernel
+        .iter()
+        .zip(pixels.iter())
+        .flat_map(|(kernel_col, input_col)| {
+            kernel_col
+                .iter()
+                .zip(input_col.iter())
+                .map(|(k, p)| k * p)
+        })
+        .sum();
+    // normalize
+    accumulator / 8.0
+}
+</code></pre>
+<p>Let's write a quick sanity test for our convolution function. Typically, tests are separated into a &quot;tests&quot; module, but kept inline with the code they verify. So, in our main file we can create a module, and mark it so that it is only compiled in the test configuration. Any function marked with <code>#[test]</code> will be run as a test.</p>
+<pre><code class="language-rust ignore">#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_convolution() {
+
+    }
+}
+</code></pre>
+<pre><code class="language-rust ignore">#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_convolution() {
+        let pixels: [[f32; 3]; 3] = [
+            [1.0, 2.0, 3.0],
+            [4.0, 5.0, 6.0],
+            [7.0, 8.0, 9.0]
+        ];
+        assert_eq!(convolve(&amp;SOBEL_KERNEL_X, &amp;pixels), 3.0);
+        assert_eq!(convolve(&amp;SOBEL_KERNEL_Y, &amp;pixels), 1.0);
+    }
+}
+</code></pre>
+<p>Run the tests with <code>cargo test</code> and we should see passing tests.</p>
+<h2><a class="header" href="#getting-the-pixels" id="getting-the-pixels">Getting the pixels</a></h2>
+<p>Our convolution function is ready, but we are missing the connection between the image we converted to luma and the convolution operator. Let's look into the <a href="https://docs.rs/image/0.22.1/image/type.GrayImage.html">docs on GrayImage</a> to see how we can get pixel values out.</p>
+<p><img src="./images/gray-image-docs.png" alt="GrayImage docs" /></p>
+<p>At first glance, it doesn't look like there are many methods, huh?</p>
+<p>Let's take a closer look. <code>GrayImage</code> is defined as a type alias of a specific variation of ImageBuffer (using generic type parameters). If we click on <code>ImageBuffer</code> (usually in Rust docs, you can click on a type name to see its docs), we will see the <a href="https://docs.rs/image/0.22.1/image/struct.ImageBuffer.html">full list of available methods</a>.</p>
+<p><img src="./images/image-get-pixel-docs.png" alt="get_pixel docs" /></p>
+<p>There's a <code>get_pixel</code> method! Oh, but the return type is <code>&amp;P</code>, that's weird. If we look at the declaration of ImageBuffer though, we see that <code>P</code> must implement the <code>Pixel</code> trait. And if we look at the <code>Pixel</code> <a href="">trait docs</a>, we see a method called <code>channels()</code> that gives us a slice of the pixel's values, one for each channel. Since out image is grayscale (luma), we expect just one channel.</p>
+<p>This might seem over-complicated. However, by abstracting away the underlying storage formats, the &quot;image&quot; crate lets users build processing systems that are general over many image formats. Remember, the Rust compiler boils down all of the abstractions into highly optimized code. So we can have our generics and safety while writing high-performance code!</p>
+<p>For our case, we just have a GrayImage with pixels of type <code>Luma&lt;u8&gt;</code> that implement the <code>Pixel</code> trait. So we should be able to fetch a pixel pretty easily. Here's a go:</p>
+<pre><code class="language-rust ignore">use image::Pixel; // trait for '.channels()'
+
+...
+
+let input_image = image::open(&amp;options.input_path)
+    .expect(&quot;Failed to open input image file&quot;);
+
+let gray_image = input_image.to_luma();
+
+println!(&quot;Pixel 0, 0: {}&quot;, gray_image.get_pixel(0, 0).channels()[0]);
+
+gray_image.save(&amp;options.output_path)
+    .expect(&quot;Failed to save output image to file&quot;);
+</code></pre>
+<p>Generally, well-written Rust crates provide comprehensive types like this to cover the data formats and structures that they operate on. An image library in C/C++ may provide a raw buffer of pixels, which is easy to access. But, as soon as you have to deal with multiple formats, multiple pixel orderings (RGB, BGR, RGBA, etc.), it can be difficult to ensure all code branches are correct. With Rust, the type system will catch these errors at compile time.</p>
+<p>Now that we can grab pixels, let's write a function that takes the pixel values and calls our convolution function. First we'll start with this signature, and copying the input. We need a place to store the resulting convolved pixel values, and we want an image of the same dimensions and data types. <code>clone()</code> is an easy way to get that. Notice that <code>result</code> is declared as <code>mut</code> since we will be modifying its contents.</p>
+<pre><code class="language-rust ignore">use image::GrayImage;
+
+fn sobel_filter(input: &amp;GrayImage) -&gt; GrayImage {
+    let mut result = input.clone();
+
+    result
+}
+</code></pre>
+<p>To start with, let's just create the block of pixels to feed the convolution for each center pixel.</p>
+<pre><code class="language-rust ignore">fn sobel_filter(input: &amp;GrayImage) -&gt; GrayImage {
+    let mut result = input.clone();
+
+    for x in 0..input.width() {
+        for y in 0..input.height() {
+            let pixels = [
+                [input.get_pixel(x - 1, y - 1).channels()[0],
+                 input.get_pixel(x - 1, y).channels()[0],
+                 input.get_pixel(x - 1, y + 1).channels()[0]],
+                [input.get_pixel(x, y - 1).channels()[0],
+                 input.get_pixel(x, y).channels()[0],
+                 input.get_pixel(x, y + 1).channels()[0]],
+                [input.get_pixel(x + 1, y - 1).channels()[0],
+                 input.get_pixel(x + 1, y).channels()[0],
+                 input.get_pixel(x + 1, y + 1).channels()[0]]];
+        }
+    }
+
+    result
+}
+</code></pre>
+<p>We'll need to throw a call into <code>fn main()</code> to use this:</p>
+<pre><code class="language-rust ignore">let input_image = image::open(&amp;options.input_path)
+    .expect(&quot;Failed to open input image file&quot;);
+
+let gray_image = input_image.to_luma();
+
+let output_image = sobel_filter(&amp;gray_image);
+
+output_image.save(&amp;options.output_path)
+    .expect(&quot;Failed to save output image to file&quot;);
+</code></pre>
+<p>And then when we run this... what happened?!? What does it mean we attempted subtraction with overflow?</p>
+<p>Well, in Rust debug builds, the primitive integer types are checked for overflows an underflows in the basic operations. Don't worry, these are not enabled in the release build unless you specifically want.</p>
+<p>And, just like now, the overflow checks in debug builds help catch bugs early on.</p>
+<h2><a class="header" href="#handling-the-edges" id="handling-the-edges">Handling the edges</a></h2>
+<p>The overflow is happening because of the <code>x - 1</code> and <code>y - 1</code> when x or y is zero. This is indicative of a bigger question: how should we handle the edges of the image?</p>
+<p>As the <a href="https://en.wikipedia.org/wiki/Kernel_(image_processing)#Edge_Handling">Wikipedia page on convolution kernels</a> explains, there are several ways:</p>
+<ul>
+<li>Extend the image by duplicating pixels at the edge</li>
+<li>Wrap around to the other side</li>
+<li>Crop the output image 2 pixels smaller in X and Y</li>
+<li>Crop the kernel on the edges and corners</li>
+</ul>
+<p>If we crop the output image, we can easily adapt our code. The ImageBuffer struct implements the GenericImage trait which has a function called <code>sub_image</code> that gives us a view into rectangular section of an image. With a <code>SubImage</code> we can call <code>to_image()</code> to get a cropped <code>ImageBuffer</code> back out.</p>
+<pre><code class="language-rust ignore">use image::GenericImage;
+
+fn sobel_filter(input: &amp;GrayImage) -&gt; GrayImage {
+    let mut result = input
+        .sub_image(1, 1, input.width() - 2, input.height() - 2)
+        .to_image();
+
+    for x in 1..(input.width() - 1) {
+        for y in 1..(input.height() - 1) {
+            let pixels = [
+                [input.get_pixel(x - 1, y - 1).channels()[0],
+                 input.get_pixel(x - 1, y).channels()[0],
+                 input.get_pixel(x - 1, y + 1).channels()[0]],
+                [input.get_pixel(x, y - 1).channels()[0],
+                 input.get_pixel(x, y).channels()[0],
+                 input.get_pixel(x, y + 1).channels()[0]],
+                [input.get_pixel(x + 1, y - 1).channels()[0],
+                 input.get_pixel(x + 1, y).channels()[0],
+                 input.get_pixel(x + 1, y + 1).channels()[0]]];
+        }
+    }
+
+    result
+}
+</code></pre>
+<p>Cool. No more overflows. We should get the convolution in there! Oh, and did you find a place where clone might be handy?</p>
+<pre><code class="language-rust ignore">use image::GenericImage;
+
+fn sobel_filter(input: &amp;GrayImage) -&gt; GrayImage {
+    let mut result = input
+        .clone()
+        .sub_image(1, 1, input.width() - 2, input.height() - 2)
+        .to_image();
+
+    for x in 1..(input.width() - 1) {
+        for y in 1..(input.height() - 1) {
+            let pixels = [
+                [input.get_pixel(x - 1, y - 1).channels()[0],
+                 input.get_pixel(x - 1, y).channels()[0],
+                 input.get_pixel(x - 1, y + 1).channels()[0]],
+                [input.get_pixel(x, y - 1).channels()[0],
+                 input.get_pixel(x, y).channels()[0],
+                 input.get_pixel(x, y + 1).channels()[0]],
+                [input.get_pixel(x + 1, y - 1).channels()[0],
+                 input.get_pixel(x + 1, y).channels()[0],
+                 input.get_pixel(x + 1, y + 1).channels()[0]]];
+
+            let gradient_x = convolve(&amp;SOBEL_KERNEL_X, &amp;pixels);
+            let gradient_y = convolve(&amp;SOBEL_KERNEL_Y, &amp;pixels);
+        }
+    }
+
+    result
+}
+</code></pre>
+<p>Uh oh. Now we have a different problem. Our <code>GrayImage</code> gives us <code>u8</code> from <code>get_pixel(x, y).channels()[0]</code>, but <code>convolve</code> expects the pixels to be f32. In fact, our convolution also expects the pixels to be in the range [0.0-1.1].</p>
+<h2><a class="header" href="#lumafloat-trait" id="lumafloat-trait">LumaFloat trait</a></h2>
+<p>This is a great time to build a new trait! We can create a trait with a new <code>get_float_luma()</code> function and implement it for GrayImage. Since we're also going to be writing pixels to the output image, let's also add a <code>put_float_luma()</code> method.</p>
+<pre><code class="language-rust ignore">trait LumaFloat {
+    fn get_float_luma(&amp;self, x: u32, y: u32) -&gt; f32;
+    fn put_float_luma(&amp;mut self, x: u32, y: u32, luma: f32);
+}
+
+impl LumaFloat for GrayImage {
+    fn get_float_luma(&amp;self, x: u32, y: u32) -&gt; f32 {
+        self.get_pixel(x, y)[0] as f32 / 255.0
+    }
+
+    fn put_float_luma(&amp;mut self, x: u32, y: u32, luma: f32) {
+        self.put_pixel(x, y, Luma([(luma * 255.0) as u8]));
+    }
+}
+</code></pre>
+<p>Now in our Sobel filter function, things get a lot cleaner. We can also add a couple lines to compute the magnitude of the gradient and store it back to the resulting image.</p>
+<pre><code class="language-rust ignore">use image::{GenericImage, GrayImage, Luma};
+
+fn sobel_filter(input: &amp;GrayImage) -&gt; GrayImage {
+    let mut result = input
+        .clone()
+        .sub_image(1, 1, input.width() - 2, input.height() - 2)
+        .to_image();
+
+    for x in 1..(input.width() - 1) {
+        for y in 1..input.height() - 1 {
+            let pixels = [
+                [input.get_float_luma(x - 1, y - 1),
+                 input.get_float_luma(x - 1, y),
+                 input.get_float_luma(x - 1, y + 1)],
+                [input.get_float_luma(x, y - 1),
+                 input.get_float_luma(x, y),
+                 input.get_float_luma(x, y + 1)],
+                [input.get_float_luma(x + 1, y - 1),
+                 input.get_float_luma(x + 1, y),
+                 input.get_float_luma(x + 1, y + 1)]];
+
+            let gradient_x = convolve(&amp;SOBEL_KERNEL_X, &amp;pixels);
+            let gradient_y = convolve(&amp;SOBEL_KERNEL_Y, &amp;pixels);
+            let magnitude = (gradient_x.powi(2) + gradient_y.powi(2)).sqrt();
+            result.put_float_luma(x - 1, y - 1, magnitude);
+        }
+    }
+
+    result
+}
+</code></pre>
+<p>Now if we <code>cargo run</code>, the output should be interesting. If the runtime is a bit long, you might try <code>cargo run --release</code>. Running in release mode can make a massive difference.</p>
+<h2><a class="header" href="#we-have-a-sobel-filter" id="we-have-a-sobel-filter">We have a Sobel Filter!</a></h2>
+<p><img src="./images/valve_sobel.png" alt="Result image" /></p>
+<h2><a class="header" href="#extra-credit" id="extra-credit">Extra credit</a></h2>
+<ul>
+<li>Can you implement edge extension instead of cropping?</li>
+<li>Can you implement a box blur instead of the Sobel operator?</li>
+<li>Can you extend the command line interface to allow the user to select what filter to apply?</li>
+</ul>
+<h1><a class="header" href="#rayon-embarassingly-parallel-embarassingly-easy" id="rayon-embarassingly-parallel-embarassingly-easy">Rayon: embarassingly parallel, embarassingly easy</a></h1>
+<p>One of the big selling points of Rust is that it provides compile-time safety checking, and that extends beyond just memory to things like data races and ownership between threads.</p>
+<p>To start using parallelism in Rust, we don't need to worry about many complicated concepts at first. We just have to know how to use iterators thanks to the <a href="https://docs.rs/rayon/1.1.0/rayon/">crate called &quot;rayon&quot;</a>!</p>
+<p>The rayon crate automatically handles all the details of data parallel programming for the majority of cases:</p>
+<ul>
+<li>
+<p>Detects the number of CPU cores available</p>
+</li>
+<li>
+<p>Starts up a pool of worker threads</p>
+</li>
+<li>
+<p>Handles splitting the workload between workers</p>
+</li>
+<li>
+<p>Uses work stealing to rebalance the workload on-the-fly</p>
+</li>
+</ul>
+<p>Let's look at a simple example. Here's a vector multiply-accumulate implemented with Rust iterators:</p>
+<pre><pre class="playpen"><code class="language-rust ignore mdbook-runnable">fn main() {
+    let v1: Vec&lt;usize&gt; = (0..300000).collect();
+    let v2: Vec&lt;usize&gt; = (300000..600000).collect();
+    let sum: usize = v1.iter().zip(v2.iter()).map(|(a, b)| a * b).sum();
+    println!(&quot;Sum: {}&quot;, sum);
+}
+</code></pre></pre>
+<p>And now with data parallelism across all the cores available:</p>
+<pre><pre class="playpen"><code class="language-rust ignore mdbook-runnable">#extern crate rayon;
+use rayon::prelude::*;
+
+fn main() {
+    let v1: Vec&lt;usize&gt; = (0..300000).collect();
+    let v2: Vec&lt;usize&gt; = (300000..600000).collect();
+    let sum: usize = v1.par_iter().zip(v2.par_iter()).map(|(a, b)| a * b).sum();
+    println!(&quot;Sum: {}&quot;, sum);
+}
+</code></pre></pre>
+<h2><a class="header" href="#using-rayon-in-the-sobel-filter" id="using-rayon-in-the-sobel-filter">Using rayon in the Sobel filter</a></h2>
+<p>We can create an iterator that yields every pixel (X, Y) and <code>par_iter()</code> on that.</p>
+<pre><code class="language-rust ignore">fn sobel_filter(input: &amp;GrayImage) -&gt; GrayImage {
+    let mut result = input
+        .clone()
+        .sub_image(1, 1, input.width() - 2, input.height() - 2)
+        .to_image();
+
+    let pixels_iter = (1..(input.width() - 1)).into_par_iter()
+        .flat_map(move |x| (1..(input.height() - 1))
+            .into_par_iter()
+            .map(move |y| (x, y)));
+
+    pixels_iter.for_each(|(x, y)| {
+        let pixels = [
+            [input.get_float_luma(x - 1, y - 1),
+                input.get_float_luma(x - 1, y),
+                input.get_float_luma(x - 1, y + 1)],
+            [input.get_float_luma(x, y - 1),
+                input.get_float_luma(x, y),
+                input.get_float_luma(x, y + 1)],
+            [input.get_float_luma(x + 1, y - 1),
+                input.get_float_luma(x + 1, y),
+                input.get_float_luma(x + 1, y + 1)]];
+
+        let gradient_x = convolve(&amp;SOBEL_KERNEL_X, &amp;pixels);
+        let gradient_y = convolve(&amp;SOBEL_KERNEL_Y, &amp;pixels);
+        let magnitude = (gradient_x.powi(2) + gradient_y.powi(2)).sqrt();
+        result.put_float_luma(x - 1, y - 1, magnitude);
+    });
+
+    result
+}
+</code></pre>
+<p>Looks like we have a problem though! The mutable result image cannot be mutably borrowed in more than one place! The Rust compiler detects that we are attemping to share a mutable resource between multiple threads.</p>
+<p>One way we can get around this is to collect the convolution results (the computationally expensive part) and then apply the results in a single thread after.</p>
+<pre><code class="language-rust ignore">fn sobel_filter(input: &amp;GrayImage) -&gt; GrayImage {
+    let mut result = input
+        .clone()
+        .sub_image(1, 1, input.width() - 2, input.height() - 2)
+        .to_image();
+
+    let pixels_iter = (1..(input.width() - 1)).into_par_iter()
+        .flat_map(move |x| (1..(input.height() - 1))
+            .into_par_iter()
+            .map(move |y| (x, y)));
+
+    let convolved_pixels: Vec&lt;(u32, u32, f32)&gt; = pixels_iter
+        .map(|(x, y)| {
+            let pixels = [
+                [input.get_float_luma(x - 1, y - 1),
+                 input.get_float_luma(x - 1, y),
+                 input.get_float_luma(x - 1, y + 1)],
+                [input.get_float_luma(x, y - 1),
+                 input.get_float_luma(x, y),
+                 input.get_float_luma(x, y + 1)],
+                [input.get_float_luma(x + 1, y - 1),
+                 input.get_float_luma(x + 1, y),
+                 input.get_float_luma(x + 1, y + 1)]];
+
+            let gradient_x = convolve(&amp;SOBEL_KERNEL_X, &amp;pixels);
+            let gradient_y = convolve(&amp;SOBEL_KERNEL_Y, &amp;pixels);
+            let magnitude = (gradient_x.powi(2) + gradient_y.powi(2)).sqrt();
+            (x, y, magnitude)
+    }).collect();
+
+    for (x, y, magnitude) in convolved_pixels.iter() {
+        result.put_float_luma(x - 1, y - 1, *magnitude);
+    }
+
+    result
+}
+</code></pre>
+<h2><a class="header" href="#granularity" id="granularity">Granularity</a></h2>
+<p>The parallelized version above compiles and runs fine. But if we were to open it up in a profiler, we'd see overhead due to the fine-grain parallelism we applied. It's usually best to try to &quot;chunk&quot; work up.</p>
+<p>Since we're processing an image, we can easily chunk the work by column or row.</p>
+<pre><code class="language-rust ignore">fn sobel_filter(input: &amp;GrayImage) -&gt; GrayImage {
+    let mut result = input
+        .clone()
+        .sub_image(1, 1, input.width() - 2, input.height() - 2)
+        .to_image();
+
+    let convolved_pixels: Vec&lt;(u32, u32, f32)&gt; = (1..(input.width() - 1))
+        .into_par_iter()
+        .flat_map(|x| {
+            (1..(input.height() - 1))
+                .into_par_iter()
+                .map(move |y| {
+                    let pixels = [
+                        [input.get_float_luma(x - 1, y - 1),
+                        input.get_float_luma(x - 1, y),
+                        input.get_float_luma(x - 1, y + 1)],
+                        [input.get_float_luma(x, y - 1),
+                        input.get_float_luma(x, y),
+                        input.get_float_luma(x, y + 1)],
+                        [input.get_float_luma(x + 1, y - 1),
+                        input.get_float_luma(x + 1, y),
+                        input.get_float_luma(x + 1, y + 1)]];
+
+                    let gradient_x = convolve(&amp;SOBEL_KERNEL_X, &amp;pixels);
+                    let gradient_y = convolve(&amp;SOBEL_KERNEL_Y, &amp;pixels);
+                    let magnitude = (gradient_x.powi(2) + gradient_y.powi(2)).sqrt();
+                    (x, y, magnitude)
+                })
+        }).collect();
+
+    for (x, y, magnitude) in convolved_pixels.iter() {
+        result.put_float_luma(x - 1, y - 1, *magnitude);
+    }
+
+    result
+}
+</code></pre>
+<h1><a class="header" href="#code-organization--modules" id="code-organization--modules">Code Organization &amp; Modules</a></h1>
+<p>At this point, we're starting to pollute one Rust source file with a few unrelated operations and imports. Rust makes it pretty easy to refactor code into a hierarchy of modules, and sprinkle in encapsulation where appropriate.</p>
+<h2><a class="header" href="#whats-a-module" id="whats-a-module">What's a module?</a></h2>
+<p>A module is very simliar to a C++ namespace, in that it is a named scope containing declarations of structs, enums, functions, traits, etc.</p>
+<p>Let's take a quick look:</p>
+<pre><pre class="playpen"><code class="language-rust editable">mod say {
+    pub fn hello() {
+        println!(&quot;I'm a module&quot;);
+    }
+}
+
+fn main() {
+    say::hello();
+}
+</code></pre></pre>
+<h2><a class="header" href="#visibility" id="visibility">Visibility</a></h2>
+<p>In the simple example above, we also see <code>pub</code> which is a visibility specifier. By default, everything is Rust is visible within the same module, and its descendents. If we want to use a declaration outside of its module, we need to declare it as <code>pub</code>.</p>
+<p>Rust also gives you some more tools for fine-grain visibility control:</p>
+<ul>
+<li><code>pub(super)</code>: visible to containing module</li>
+<li><code>pub(crate)</code>: visible to whole containing crate</li>
+<li><code>pub(some::path::here)</code>: visible in the specified module namespace</li>
+</ul>
+<h2><a class="header" href="#ways-to-make-a-module" id="ways-to-make-a-module">Ways to make a module</a></h2>
+<ol>
+<li>
+<p>The <code>mod {}</code> syntax above</p>
+</li>
+<li>
+<p>As a separate file</p>
+</li>
+</ol>
+<pre><code class="language-ignore">crate
+- Cargo.toml
+- src
+  - lib.rs (or main.rs)
+  - mymodule.rs
+</code></pre>
+<p>In lib.rs (or main.rs)</p>
+<pre><code class="language-rust ignore">mod mymodule;
+</code></pre>
+<p>In mymodule.rs:</p>
+<pre><code class="language-rust ignore">pub fn myfunction() {
+    ...
+}
+</code></pre>
+<ol start="3">
+<li>As a directory (for when your module has modules)</li>
+</ol>
+<pre><code class="language-ignore">crate
+- Cargo.toml
+- src
+  - lib.rs (or main.rs)
+  - bigmodule
+    - mod.rs
+    - submodule.rs
+</code></pre>
+<p>In lib.rs (or main.rs):</p>
+<pre><code class="language-rust ignore">mod bigmodule;
+</code></pre>
+<p>In mod.rs:</p>
+<pre><code class="language-rust ignore">mod submodule;
+
+fn function_in_bigmodule() {
+    ...
+}
+</code></pre>
+<p>In submodule.rs</p>
+<pre><code class="language-rust ignore">fn function_in_submodule() {
+    ...
+}
+</code></pre>
+<h2><a class="header" href="#lets-refactor-the-sobel-filter-program" id="lets-refactor-the-sobel-filter-program">Let's refactor the Sobel filter program</a></h2>
+<p>We can refactor the sobel filter function, convolution function, and kernels into separate modules.</p>
+<p>This way, the main module is only concerned with user input and calling out to the other modules to execute.</p>
+<h2><a class="header" href="#re-exporting" id="re-exporting">Re-exporting</a></h2>
+<p>Rust also includes a mechanism for re-exporting imported modules, functions, structs, etc from within a module.</p>
+<p>For example, our Sobel filter module could re-export <code>GrayImage</code> since all callers will need to use it.</p>
+<pre><code class="language-rust ignore">pub use image::GrayImage;
+</code></pre>
+<p>You can <code>pub use</code> crates, whole modules, individual functions, or even sets of things (<code>pub use some_crate::{thing1, thing2};</code>).</p>
+<h2><a class="header" href="#custom-preludes" id="custom-preludes">Custom preludes</a></h2>
+<p>You probably saw in the previous chapters that to import rayon we used <code>use rayon::prelude::*</code>.</p>
+<p>This a common pattern in Rust crates to create an easy way to import a group of functions, traits, etc that are commonly all used together. For example, the standard library also uses this pattern for <code>std::io::prelude::*</code>, which includes most functions, traits, and structs necessary for file I/O.</p>
+<p>If we take a look at the <a href="https://docs.rs/rayon/1.1.0/rayon/prelude/index.html">rayon docs</a>, you'll see exactly this pattern.</p>
+<p>You create a prelude by creating a module, just like other modules. However, typically prelude modules consist solely of <code>pub use</code> statements.</p>
+<pre><code class="language-rust ignore">mod prelude {
+    pub use sobel::sobel_filter;
+    pub use image::GrayImage;
+}
+</code></pre>
+<h1><a class="header" href="#extra-exercises" id="extra-exercises">Extra exercises</a></h1>
+<h2><a class="header" href="#arguments-libraries" id="arguments-libraries">arguments libraries</a></h2>
+<p>We could polish up this binary with some better command line argument parsing, error messages, version, etc, but if you were thinking someone else has to have done this type of work before, you'd be right. Theres a helper called <a href="https://crates.io/crates/structopt">structopt</a> that uses <a href="https://doc.rust-lang.org/stable/book/ch19-06-macros.html">macros</a> to annotate your existing struct. </p>
+<pre><code class="language-rust ignore no_run">use std::path::PathBuf;
+use structopt::StructOpt;
+
+#[derive(StructOpt, Debug)]
+#[structopt(name = &quot;training&quot;)]
+struct Opt {
+    #[structopt(short = &quot;i&quot;, long = &quot;input&quot;, parse(from_os_str))]
+    input_path: PathBuf,
+    #[structopt(short = &quot;o&quot;, long = &quot;output&quot;, parse(from_os_str))]
+    output_path: PathBuf,
+}
+</code></pre>
+<p>Then not too much changes in our existing main</p>
+<pre><code class="language-rust ignore no_run">fn main() {
+    let opt = Opt::from_args();
+    println!(&quot;{:?}&quot;, opt);
+}
+</code></pre>
+<p>Running <code>cargo run -- -i cat.jpg -o test.png</code> results in</p>
+<pre><code class="language-text">Opt { input_path: &quot;cat.jpg&quot;, output_path: &quot;test.png&quot; }
+</code></pre>
+<p>and running <code>cargo run -- --help</code></p>
+<pre><code class="language-text">training 0.1.0
+First Last &lt;FirstL@gmail.com&gt;
+
+USAGE:
+    training --input &lt;input_path&gt; --output &lt;output_path&gt;
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -i, --input &lt;input_path&gt;      
+    -o, --output &lt;output_path&gt;    
+</code></pre>
+<h2><a class="header" href="#cross-compiling" id="cross-compiling">Cross compiling</a></h2>
+<p>We can generally cross compile 'for free' if rust already has the target were interested in. <a href="https://forge.rust-lang.org/platform-support.html">Rust Platform Support</a> is a great tool to see the status of various targets.</p>
+<p>To get one of those supported targets on our machine all we have to do is <code>rustup target add</code> and we can often just use system LLVM to link most all bare metal no_std (freestanding or unhosted) targets like Cortex devices. And if not cross platform toolchains are generally very available. See the <a href="https://rust-embedded.github.io/book/intro/install/macos.html">Rust Embedded book</a> for more on these targets.</p>
+<p>As an aside, if you want to check out no_std raspberry pi stuff, I recommend <a href="http://os.phil-opp.com">Phillip Oppermans blog series</a> which is basically a CS Degree in building an operating system from scratch on the raspberry pi.</p>
+<p>For hosted linux on the raspberry pi though <code>rustup target add armv7-unknown-linux-gnueabihf</code> gets us started. Now it should be as easy as <code>cargo build --target armv7-unknown-linux-gnueabihf</code> but if we try that well see</p>
+<pre><code class="language-bash">   Compiling pi-example v0.1.0 (/Users/jacobrosenthal/Downloads/pi-example)
+error: linker `arm-linux-gnueabihf-gcc` not found
+  |
+  = note: No such file or directory (os error 2)
+error: aborting due to previous error
+error: Could not compile `pi-example`.
+To learn more, run the command again with --verbose.
+</code></pre>
+<p>So we clearly need a arm-linux-gnueabihf-gcc. If were in linux its probably actually <a href="https://hackernoon.com/compiling-rust-for-the-raspberry-pi-49fdcd7df658">not that hard to get the raspberry pi toolchain linker</a>. Something like <code>sudo apt-get install gcc-4.7-multilib-arm-linux-gnueabihf</code> would probably work</p>
+<p>Then create a .cargo/config file and add the following to specify the linker, and the default target so you don’t have to specify --target every time.</p>
+<pre><code class="language-text">[build]
+target = &quot;armv7-unknown-linux-gnueabihf&quot;
+
+[target.armv7-unknown-linux-gnueabihf]
+linker = &quot;arm-linux-gnueabihf-gcc-4.7&quot;
+</code></pre>
+<p>and now <code>cargo build</code> should work for you! </p>
+<p>But on Mac or Windows that toolchain is for some reason just not commonly hosted anywhere. The best Ive found is this million page medium article <a href="https://medium.com/coinmonks/setup-gcc-8-1-cross-compiler-toolchain-for-raspberry-pi-3-on-macos-high-sierra-cb3fc8b6443e">Setup GCC 8.1 Cross Compiler Toolchain for Raspberry Pi 3 on macOS High Sierra</a></p>
+<p>But you know whats better than doing all that yourself and polluting your machine? Having someone else do work for you and packaging it in a reusable cross platform way. Maybe with something like .. a docker container.. Enter <a href="https://github.com/rust-embedded/cross">Cross</a></p>
+<p>Cross hasn’t had an update in a while, so I recommend installing from git head with: <code>cargo install --force --git https://github.com/rust-embedded/cross cross</code></p>
+<p>And assuming your target is supported you can simply swap your cargo command for a cross command like</p>
+<pre><code class="language-bash">cross build --target=armv7-unknown-linux-gnueabihf
+</code></pre>
+<h2><a class="header" href="#ffi" id="ffi">ffi</a></h2>
+<p>Rust can consume C ABI or freeze its output to C ABI, so anything (Golang, Python, Node) could consume Rust code, and Rust could consume any C, C++, etc that you have already built. <a href="https://github.com/alexcrichton/rust-ffi-examples">rust-ffi-examples</a> has examples for all your favorite languages.</p>
+<p>For compiling C to Rust, you'll be using <a href="https://github.com/rust-lang/rust-bindgen">rust-bindgen</a> which has the <a href="https://rust-lang.github.io/rust-bindgen/introduction.html">bindgen user guide</a> for explaining its usage.</p>
+<p>Generally speaking, we can get some Rust bindings generated 'for free' from the C headers. IE given the C header doggo.h bindgen can (often) produce a Rust module you can call from your existing code.</p>
+<p>Its common to run bindgen as a bash command line you can maintain your upstream by live patch your header file. Then when confident you can hook into the <a href="https://doc.rust-lang.org/cargo/reference/build-scripts.html">Rust build system</a> to script bindgen as well as <a href="https://crates.io/crates/cc">gcc</a> or cc in a build.rs to create (and cache) artifacts as part of your build process. You'll generally seperately create a crate second higher level idoimatic rust api which consumes the generated bindings.</p>
+<p>You'll find a lot of common libraries either statically built or dynamically linked in the crates.io repository denoted by the -sys naming scheme:</p>
+<ul>
+<li>https://crates.io/crates/openssl-sys</li>
+<li>https://crates.io/crates/libz-sys</li>
+<li>https://crates.io/crates/curl-sys</li>
+</ul>
+<p>You’ll want to get well acquainted with the <a href="https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html">unsafe keyword</a> heavily here as you cross the C to Rust border, as well as the <a href="https://doc.rust-lang.org/nomicon/ffi.html">nomicon</a> to understand the darker arts.</p>
+<p>You can also go the other way, call your Rust code from C. A common helper library is <a href="https://github.com/eqrion/cbindgen">cbindgen</a></p>
+<h2><a class="header" href="#macros-metaprogramming" id="macros-metaprogramming">macros (Metaprogramming)</a></h2>
+<p>We've been glossing over <a href="https://doc.rust-lang.org/1.30.0/book/2018-edition/appendix-04-macros.html">macros</a> up til now. A big difference from C/C++ macros is that Rust macros are hygienic so you can't hurt yourself using them..except for compile times.</p>
+<p>Declaritive macros are your meat and potatos code generation great for DSLs and variadic functions.
+You've seen these function-like macros already with <code>println!()</code></p>
+<p>Procedural macros deliver you the entire abstract syntax tree for you to mutate and return. You've seen these already with built in attribute-like macros like <code>#[derive(Debug)]</code></p>
+<p>Generally you'll use <a href="https://github.com/dtolnay/cargo-expand">cargo-expand</a> to expand macros to the console so you can see what you're generating.</p>
+<p>For instance, we implemented Display manually before. You may have seen by now you can implement Debug on a type for free if underlying types support it by using the <code>#[derive(Debug)]</code> attribute macro. Using cargo expand we can see what that did for us:</p>
+<pre><pre class="playpen"><code class="language-rust">#[derive(Debug)]
+struct S;
+
+fn main() {
+}
+</code></pre></pre>
+<pre><code class="language-rust ignore">#![feature(prelude_import)]
+#![no_std]
+#[prelude_import]
+use ::std::prelude::v1::*;
+#[macro_use]
+extern crate std as std;
+struct S;
+#[automatically_derived]
+#[allow(unused_qualifications)]
+impl ::core::fmt::Debug for S {
+    fn fmt(&amp;self, f: &amp;mut ::core::fmt::Formatter) -&gt; ::core::fmt::Result {
+        match *self {
+            S =&gt; {
+                let mut debug_trait_builder = f.debug_tuple(&quot;S&quot;);
+                debug_trait_builder.finish()
+            }
+        }
+    }
+}
+
+fn main() { }
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+        
+        <script type="text/javascript">
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+        
+        
+
+    </body>
+</html>

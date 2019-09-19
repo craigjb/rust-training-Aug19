@@ -1,0 +1,321 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Extra Credit - rust-training-aug19</title>
+        
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+        <link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:500" rel="stylesheet" type="text/css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body class="light">
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            document.body.className = theme;
+            document.querySelector('html').className = theme + ' js';
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="affix"><a href="preface.html">Preface</a></li><li><a href="installation_win.html"><strong aria-hidden="true">1.</strong> Installation (Windows)</a></li><li><a href="anatomy.html"><strong aria-hidden="true">2.</strong> Anatomy</a></li><li><a href="data_types.html"><strong aria-hidden="true">3.</strong> Data types</a></li><li><a href="control.html"><strong aria-hidden="true">4.</strong> Control Structures</a></li><li><a href="error_handling.html"><strong aria-hidden="true">5.</strong> Option and Result</a></li><li><a href="traits.html"><strong aria-hidden="true">6.</strong> Traits</a></li><li><a href="external_dependencies.html"><strong aria-hidden="true">7.</strong> External dependencies</a></li><li><a href="enums.html"><strong aria-hidden="true">8.</strong> Enum</a></li><li><a href="borrowing.html"><strong aria-hidden="true">9.</strong> Borrowing, cloning, and scopes</a></li><li><a href="vec_generics.html"><strong aria-hidden="true">10.</strong> Vec, an intro to generics</a></li><li><a href="iterators.html"><strong aria-hidden="true">11.</strong> Iterators</a></li><li><a href="sobel.html"><strong aria-hidden="true">12.</strong> Example: Image Processing</a></li><li><a href="rayon.html"><strong aria-hidden="true">13.</strong> Rayon</a></li><li><a href="org.html"><strong aria-hidden="true">14.</strong> Code Organization &amp; Modules</a></li><li><a href="extra.html" class="active"><strong aria-hidden="true">15.</strong> Extra Credit</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar" class="menu-bar">
+                    <div id="menu-bar-sticky-container">
+                        <div class="left-buttons">
+                            <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                                <i class="fa fa-bars"></i>
+                            </button>
+                            <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                                <i class="fa fa-paint-brush"></i>
+                            </button>
+                            <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                                <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                                <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                            </ul>
+                            
+                            <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                                <i class="fa fa-search"></i>
+                            </button>
+                            
+                        </div>
+
+                        <h1 class="menu-title">rust-training-aug19</h1>
+
+                        <div class="right-buttons">
+                            <a href="print.html" title="Print this book" aria-label="Print this book">
+                                <i id="print-button" class="fa fa-print"></i>
+                            </a>
+                            
+                        </div>
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1><a class="header" href="#extra-exercises" id="extra-exercises">Extra exercises</a></h1>
+<h2><a class="header" href="#arguments-libraries" id="arguments-libraries">arguments libraries</a></h2>
+<p>We could polish up this binary with some better command line argument parsing, error messages, version, etc, but if you were thinking someone else has to have done this type of work before, you'd be right. Theres a helper called <a href="https://crates.io/crates/structopt">structopt</a> that uses <a href="https://doc.rust-lang.org/stable/book/ch19-06-macros.html">macros</a> to annotate your existing struct. </p>
+<pre><code class="language-rust ignore no_run">use std::path::PathBuf;
+use structopt::StructOpt;
+
+#[derive(StructOpt, Debug)]
+#[structopt(name = &quot;training&quot;)]
+struct Opt {
+    #[structopt(short = &quot;i&quot;, long = &quot;input&quot;, parse(from_os_str))]
+    input_path: PathBuf,
+    #[structopt(short = &quot;o&quot;, long = &quot;output&quot;, parse(from_os_str))]
+    output_path: PathBuf,
+}
+</code></pre>
+<p>Then not too much changes in our existing main</p>
+<pre><code class="language-rust ignore no_run">fn main() {
+    let opt = Opt::from_args();
+    println!(&quot;{:?}&quot;, opt);
+}
+</code></pre>
+<p>Running <code>cargo run -- -i cat.jpg -o test.png</code> results in</p>
+<pre><code class="language-text">Opt { input_path: &quot;cat.jpg&quot;, output_path: &quot;test.png&quot; }
+</code></pre>
+<p>and running <code>cargo run -- --help</code></p>
+<pre><code class="language-text">training 0.1.0
+First Last &lt;FirstL@gmail.com&gt;
+
+USAGE:
+    training --input &lt;input_path&gt; --output &lt;output_path&gt;
+
+FLAGS:
+    -h, --help       Prints help information
+    -V, --version    Prints version information
+
+OPTIONS:
+    -i, --input &lt;input_path&gt;      
+    -o, --output &lt;output_path&gt;    
+</code></pre>
+<h2><a class="header" href="#cross-compiling" id="cross-compiling">Cross compiling</a></h2>
+<p>We can generally cross compile 'for free' if rust already has the target were interested in. <a href="https://forge.rust-lang.org/platform-support.html">Rust Platform Support</a> is a great tool to see the status of various targets.</p>
+<p>To get one of those supported targets on our machine all we have to do is <code>rustup target add</code> and we can often just use system LLVM to link most all bare metal no_std (freestanding or unhosted) targets like Cortex devices. And if not cross platform toolchains are generally very available. See the <a href="https://rust-embedded.github.io/book/intro/install/macos.html">Rust Embedded book</a> for more on these targets.</p>
+<p>As an aside, if you want to check out no_std raspberry pi stuff, I recommend <a href="http://os.phil-opp.com">Phillip Oppermans blog series</a> which is basically a CS Degree in building an operating system from scratch on the raspberry pi.</p>
+<p>For hosted linux on the raspberry pi though <code>rustup target add armv7-unknown-linux-gnueabihf</code> gets us started. Now it should be as easy as <code>cargo build --target armv7-unknown-linux-gnueabihf</code> but if we try that well see</p>
+<pre><code class="language-bash">   Compiling pi-example v0.1.0 (/Users/jacobrosenthal/Downloads/pi-example)
+error: linker `arm-linux-gnueabihf-gcc` not found
+  |
+  = note: No such file or directory (os error 2)
+error: aborting due to previous error
+error: Could not compile `pi-example`.
+To learn more, run the command again with --verbose.
+</code></pre>
+<p>So we clearly need a arm-linux-gnueabihf-gcc. If were in linux its probably actually <a href="https://hackernoon.com/compiling-rust-for-the-raspberry-pi-49fdcd7df658">not that hard to get the raspberry pi toolchain linker</a>. Something like <code>sudo apt-get install gcc-4.7-multilib-arm-linux-gnueabihf</code> would probably work</p>
+<p>Then create a .cargo/config file and add the following to specify the linker, and the default target so you don’t have to specify --target every time.</p>
+<pre><code class="language-text">[build]
+target = &quot;armv7-unknown-linux-gnueabihf&quot;
+
+[target.armv7-unknown-linux-gnueabihf]
+linker = &quot;arm-linux-gnueabihf-gcc-4.7&quot;
+</code></pre>
+<p>and now <code>cargo build</code> should work for you! </p>
+<p>But on Mac or Windows that toolchain is for some reason just not commonly hosted anywhere. The best Ive found is this million page medium article <a href="https://medium.com/coinmonks/setup-gcc-8-1-cross-compiler-toolchain-for-raspberry-pi-3-on-macos-high-sierra-cb3fc8b6443e">Setup GCC 8.1 Cross Compiler Toolchain for Raspberry Pi 3 on macOS High Sierra</a></p>
+<p>But you know whats better than doing all that yourself and polluting your machine? Having someone else do work for you and packaging it in a reusable cross platform way. Maybe with something like .. a docker container.. Enter <a href="https://github.com/rust-embedded/cross">Cross</a></p>
+<p>Cross hasn’t had an update in a while, so I recommend installing from git head with: <code>cargo install --force --git https://github.com/rust-embedded/cross cross</code></p>
+<p>And assuming your target is supported you can simply swap your cargo command for a cross command like</p>
+<pre><code class="language-bash">cross build --target=armv7-unknown-linux-gnueabihf
+</code></pre>
+<h2><a class="header" href="#ffi" id="ffi">ffi</a></h2>
+<p>Rust can consume C ABI or freeze its output to C ABI, so anything (Golang, Python, Node) could consume Rust code, and Rust could consume any C, C++, etc that you have already built. <a href="https://github.com/alexcrichton/rust-ffi-examples">rust-ffi-examples</a> has examples for all your favorite languages.</p>
+<p>For compiling C to Rust, you'll be using <a href="https://github.com/rust-lang/rust-bindgen">rust-bindgen</a> which has the <a href="https://rust-lang.github.io/rust-bindgen/introduction.html">bindgen user guide</a> for explaining its usage.</p>
+<p>Generally speaking, we can get some Rust bindings generated 'for free' from the C headers. IE given the C header doggo.h bindgen can (often) produce a Rust module you can call from your existing code.</p>
+<p>Its common to run bindgen as a bash command line you can maintain your upstream by live patch your header file. Then when confident you can hook into the <a href="https://doc.rust-lang.org/cargo/reference/build-scripts.html">Rust build system</a> to script bindgen as well as <a href="https://crates.io/crates/cc">gcc</a> or cc in a build.rs to create (and cache) artifacts as part of your build process. You'll generally seperately create a crate second higher level idoimatic rust api which consumes the generated bindings.</p>
+<p>You'll find a lot of common libraries either statically built or dynamically linked in the crates.io repository denoted by the -sys naming scheme:</p>
+<ul>
+<li>https://crates.io/crates/openssl-sys</li>
+<li>https://crates.io/crates/libz-sys</li>
+<li>https://crates.io/crates/curl-sys</li>
+</ul>
+<p>You’ll want to get well acquainted with the <a href="https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html">unsafe keyword</a> heavily here as you cross the C to Rust border, as well as the <a href="https://doc.rust-lang.org/nomicon/ffi.html">nomicon</a> to understand the darker arts.</p>
+<p>You can also go the other way, call your Rust code from C. A common helper library is <a href="https://github.com/eqrion/cbindgen">cbindgen</a></p>
+<h2><a class="header" href="#macros-metaprogramming" id="macros-metaprogramming">macros (Metaprogramming)</a></h2>
+<p>We've been glossing over <a href="https://doc.rust-lang.org/1.30.0/book/2018-edition/appendix-04-macros.html">macros</a> up til now. A big difference from C/C++ macros is that Rust macros are hygienic so you can't hurt yourself using them..except for compile times.</p>
+<p>Declaritive macros are your meat and potatos code generation great for DSLs and variadic functions.
+You've seen these function-like macros already with <code>println!()</code></p>
+<p>Procedural macros deliver you the entire abstract syntax tree for you to mutate and return. You've seen these already with built in attribute-like macros like <code>#[derive(Debug)]</code></p>
+<p>Generally you'll use <a href="https://github.com/dtolnay/cargo-expand">cargo-expand</a> to expand macros to the console so you can see what you're generating.</p>
+<p>For instance, we implemented Display manually before. You may have seen by now you can implement Debug on a type for free if underlying types support it by using the <code>#[derive(Debug)]</code> attribute macro. Using cargo expand we can see what that did for us:</p>
+<pre><pre class="playpen"><code class="language-rust">#[derive(Debug)]
+struct S;
+
+fn main() {
+}
+</code></pre></pre>
+<pre><code class="language-rust ignore">#![feature(prelude_import)]
+#![no_std]
+#[prelude_import]
+use ::std::prelude::v1::*;
+#[macro_use]
+extern crate std as std;
+struct S;
+#[automatically_derived]
+#[allow(unused_qualifications)]
+impl ::core::fmt::Debug for S {
+    fn fmt(&amp;self, f: &amp;mut ::core::fmt::Formatter) -&gt; ::core::fmt::Result {
+        match *self {
+            S =&gt; {
+                let mut debug_trait_builder = f.debug_tuple(&quot;S&quot;);
+                debug_trait_builder.finish()
+            }
+        }
+    }
+}
+
+fn main() { }
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="org.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a href="org.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+        <script src="ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="editor.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mode-rust.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-dawn.js" type="text/javascript" charset="utf-8"></script>
+        <script src="theme-tomorrow_night.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>
